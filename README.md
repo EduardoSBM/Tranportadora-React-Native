@@ -3,7 +3,7 @@ Projeto final da terceira fase
 Professor: Mariane Melo 
 Alunos :  Alvaro da silva, Eduardo Samuel Barbosa de Moraes, Erik Freitas  e Pedro Venicio Vassoler Schimitez
 
-#Projeto Transportadora:
+# Projeto Transportadora:
 
 Terá ao minimo cinco tabelas sendo de: admin, usuarios, coleta, entrega e carga.
 
@@ -19,8 +19,8 @@ entrega : usuario, preco(a ser pago) e destino(casa) .
 
 carga : quantidade(volume,dimensão e peso), codigo tipocarga.
 
-#Banco de dados:
+# Banco de dados:
 a definir
 
-#API:
+# API:
 a definir
