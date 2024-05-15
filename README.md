@@ -1,6 +1,8 @@
 # Tranportadora-React-Native
 Projeto final da terceira fase 
-Professor: Mariane Melo 
+
+Professora: Mariane Melo 
+
 Alunos :  Alvaro da silva, Eduardo Samuel Barbosa de Moraes, Erik Freitas  e Pedro Venicio Vassoler Schimitez
 
 # Projeto Transportadora:
