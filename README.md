@@ -1,5 +1,5 @@
 # Tranportadora-React-Native
-Projeto final da terceira fase 
+Projeto final da terceira fase do curso técnico!
 
 Professora: Mariane Melo 
 
