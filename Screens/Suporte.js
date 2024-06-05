@@ -26,9 +26,23 @@ export default function Suporte({ navigation }) {
 
       <View style={[styles.square2, styles.white]}>
           <Text style={styles.Text2}>Problemas comuns:</Text>
-          <View style={styles.viewLupa}>
-            
-          </View>
+          <Text style={styles.Text4}>
+          -- Tenho problemas com o cadastro da minha demanda
+
+          -- Tenho problemas com a entrega da demanda
+
+          --  Tenho problemas com o pagamento da demanda
+
+          --  Preciso falar com um atendente
+
+          --  Minha demanda está atrasada
+
+          --  Minha demanda chegou danificada
+
+          --  Minha demanda foi trocada
+
+          --  Minha demanda chegou com erro?
+          </Text>
         </View>
 
     </View>
@@ -136,10 +150,10 @@ const styles = StyleSheet.create({
     marginBottom: 55,
   },
   Text4: {
-    color: 'white',
-    fontSize: 25,
-    marginTop: 20,
-    marginBottom: 40,
+    color: 'blue',
+    fontSize: 15,
+    marginTop: 30,
+    marginBottom: 30,
 
   },
   red: {
