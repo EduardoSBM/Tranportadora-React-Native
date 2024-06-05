@@ -3,7 +3,9 @@ import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'reac
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import axios from 'axios';
+import {database} from '../configs/firebaseConfig';
+import firestore from '@react-native-firebase/firestore';
+import { collection } from 'firebase/firestore';
 
 
 export default function Cadastro({ navigation }) {
@@ -11,27 +13,18 @@ export default function Cadastro({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-
-  function postData() {
-    try{
-      axios.post('http://localhost:3000/usuario', 
-      {
-        nome: name,
-        login: username,
-        senha: password,
-      },
-      alert('Usuario cadastrado'),
-      setUsername(''),
-      setName(''),
-      setPassword(''),
-      navigation.navigate('Login')
-      );
-    } 
-      catch (e) {
-      console.log(e);
-      alert('Erro ao cadastrar')
-    }
-}
+  function postUsuario(){
+    firestore()
+    .collection(database, 'Usuario')
+    add({
+      nome: name,
+      login: username,
+      senha: password,
+    })
+    .then(() => {
+      alert('Usuario adicionado');
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -79,7 +72,7 @@ export default function Cadastro({ navigation }) {
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.botom} onPress={postData}>
+        <TouchableOpacity style={styles.botom} onPress={postUsuario}>
           <Text style={styles.txtbotom}>Cadastrar</Text>
         </TouchableOpacity>
       </View>

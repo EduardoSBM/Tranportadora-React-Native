@@ -1,13 +1,30 @@
 import React, { useState }  from 'react';
-import { View, StyleSheet, Text, TextInput, Image } from 'react-native';
+import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import {database, doc, deleteDoc} from '../configs/firebaseConfig';
+import { onSnapshot, collection } from 'firebase/firestore';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default function Pesquisa({ navigation }) {
 
-  const [serach, setSerach] = useState('');
+  const [pesquisa, setPesquisa] = useState([])
+
+  function PesquisaDemanda(){
+    const PesquisaDemanda = collection(database, 'Tasks') 
+    const listen = onSnapshot(PesquisaDemanda, (query) => { 
+      const list = [] 
+      query.forEach((doc) => {
+        list.push({...doc.data(), id: doc.id}) 
+      })
+      setPesquisa(list) 
+    })
+    return () => listen();
+  } 
+
 
   return (
 
     <View style={styles.container}>
+      <FlatList>
       <View style={styles.form}>
         <View style={styles.inputContainer}>
         <TextInput
@@ -20,12 +37,15 @@ export default function Pesquisa({ navigation }) {
         />
         </View>
         <View style={[styles.square1, styles.red]}>
+          <TouchableOpacity onPress={PesquisaDemanda}>
           <Image
             style={styles.lupa}
             source={require('../ft/lupa.png')}
           />
+          </TouchableOpacity>
         </View>
       </View> 
+     </FlatList>
     </View>
   );
 }
