@@ -11,7 +11,6 @@ import Pesquisa from './Screens/PesquisaDemanda';
 import Suporte from './Screens/Suporte';
 import Configs from './Screens/Configs';
 
-import { FontAwesome } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -50,7 +49,8 @@ export default function Stack() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         
-            headerStyle: { backgroundColor: "transparent" },
+            headerStyle: { backgroundColor: "white" }, 
+            //headerTransparent:true,
             headerTintColor: "red",//não sei como tirar nome "demanda" e "home" na home
             headerTitleAlign: "center",}}>
         <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
