@@ -2,18 +2,37 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import axios from 'axios';
 
-export default function Login({ navigation }) {
+
+export default function Cadastro({ navigation }) {
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-    if (username === 'dudu' && password === '1234') {
-        navigation.navigate('Home');
-        setUsername('');
-        setPassword('');
-    } else {
-        alert('Dados inválidos');
+
+  function postData() {
+    try{
+      axios.post('http://localhost:3000/usuario', 
+      {
+        nome: name,
+        login: username,
+        senha: password,
+      },
+      alert('Usuario cadastrado'),
+      setUsername(''),
+      setName(''),
+      setPassword(''),
+      navigation.navigate('Login')
+      );
+    } 
+      catch (e) {
+      console.log(e);
+      alert('Erro ao cadastrar')
     }
+}
+
   return (
     <View style={styles.container}>
       <View style={styles.img}>
@@ -22,17 +41,28 @@ export default function Login({ navigation }) {
           source={require('../ft/MAVERIK.png')}
         />
       </View>
-      <Text style={styles.txt}>Faça seu login na</Text>
-      <Text style={styles.txt1}>transportadora Maverik!</Text>
+      <Text style={styles.txt}>Realize seu cadstro!</Text>
       <View style={styles.form}>
         <View style={styles.inputContainer}>
           <Feather name="user" size={24} color="red" />
           <TextInput
             style={styles.input}
-            placeholder="Username: "
+            placeholder="Nome: "
             placeholderTextColor="gray"
+            id='name'
+            value={name}
+            onChange={e =>setName(e.target.value)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Entypo name="login" size={22} color="red" />
+          <TextInput
+            style={styles.input}
+            placeholder="Login: "
+            placeholderTextColor="gray"
+            id='username'
             value={username}
-            onChangeText={setUsername}
+            onChange={e =>setUsername(e.target.value)}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -41,19 +71,33 @@ export default function Login({ navigation }) {
             style={styles.input}
             placeholder="Senha: "
             placeholderTextColor="gray"
+            id='password'
             value={password}
-            onChangeText={setPassword}
+            onChange={e =>setPassword(e.target.value)}
             secureTextEntry
           />
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.botom} onPress={Submit}>
-          <Text style={styles.txtbotom}>login</Text>
+        <TouchableOpacity style={styles.botom} onPress={postData}>
+          <Text style={styles.txtbotom}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.cadstreaqdiv} onPress={() => navigation.navigate('Cadastro')}>
-        <Text style={styles.cadastreaq} >Sing up!</Text>
+
+      <View style={styles.viewCadastro}>
+        <Image
+          style={styles.iconCadastro}
+          source={require('../ft/google.png')}
+        />
+        <Image
+          style={styles.iconCadastro}
+          source={require('../ft/apple.png')}
+        />
+      </View>
+
+      <TouchableOpacity style={styles.cadstreaqdiv} 
+        onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.cadastreaq} >Sing in!</Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,12 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'black',
     fontStyle: 'italic',
-  },
-  txt1: {
-    fontSize: 30,
-    color: 'black',
-    fontStyle: 'italic',
-    marginBottom: 35,
+    marginBottom: "8%",
   },
   inputContainer: {
     flexDirection: 'row',
@@ -94,7 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white', // Para garantir que a sombra seja visível
     shadowColor: 'gray',  // Cor da sombra
     shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
-    shadowOpacity: 0.25,  // Opacidade da sombra
+    shadowOpacity: 0.75,  // Opacidade da sombra
     shadowRadius: 3.84,  // Raio da sombra
     elevation: 5,  // Para Android, adiciona elevação
   },
@@ -132,12 +171,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cadastreaq: {
-    marginTop: 10,
+    marginTop: '6%',
     fontSize: 15,
     color: 'blue',
   },
   form: {
     width: '100%',
     alignItems: 'center',
+  },
+  viewCadastro: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "10%",
+    marginBottom: "15px",
+    marginTop: "15px",
+  },
+  iconCadastro: {
+    height: "100%",
+    width: "35%",
+    
   },
 });
