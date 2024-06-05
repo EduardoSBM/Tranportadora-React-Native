@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "transportadoraMobile",
-    "slug": "transportadoraMobile",
+    "name": "van",
+    "slug": "van",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
