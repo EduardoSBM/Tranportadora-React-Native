@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View, ScrollView } from 'react-native';
 import { Feather, Fontisto, MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
+import { CheckBox } from 'react-native-elements';
 
 export default function Demanda({ navigation }) {
   const [remetente, setRemetente] = useState('');
@@ -100,7 +101,10 @@ export default function Demanda({ navigation }) {
           />
         </View>
         <View style={styles.minisquare}>
-
+          <CheckBox
+            title='Click Here'
+            //checked={this.state.checked}
+          />
         </View>
           
         <View>
