@@ -3,27 +3,28 @@ import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'reac
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import {database} from '../configs/firebaseConfig';
-import firestore from '@react-native-firebase/firestore';
-import { collection } from 'firebase/firestore';
+import { database, collection, addDoc } from '../configs/firebaseConfig';
 
 
 export default function Cadastro({ navigation }) {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
 
   function postUsuario(){
-    firestore()
-    .collection(database, 'Usuario')
-    add({
-      nome: name,
-      login: username,
-      senha: password,
-    })
-    .then(() => {
-      alert('Usuario adicionado');
-    });
+    try{
+      const userdocRef = collection(database, 'Usuario')
+      addDoc(userdocRef, {
+        nome: name,
+        login: username,
+        senha: password,
+      })
+      alert('usuario cadastrada')
+      navigation.navigate('Login')
+    }
+    catch (e) {
+      alert((e))
+    }
   }
 
   return (
@@ -42,9 +43,8 @@ export default function Cadastro({ navigation }) {
             style={styles.input}
             placeholder="Nome: "
             placeholderTextColor="gray"
-            id='name'
             value={name}
-            onChange={e =>setName(e.target.value)}
+            onChangeText={setName}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -53,9 +53,8 @@ export default function Cadastro({ navigation }) {
             style={styles.input}
             placeholder="Login: "
             placeholderTextColor="gray"
-            id='username'
             value={username}
-            onChange={e =>setUsername(e.target.value)}
+            onChangeText={setUsername}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -64,15 +63,14 @@ export default function Cadastro({ navigation }) {
             style={styles.input}
             placeholder="Senha: "
             placeholderTextColor="gray"
-            id='password'
             value={password}
-            onChange={e =>setPassword(e.target.value)}
+            onChangeText={setPassword}
             secureTextEntry
           />
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.botom} onPress={postUsuario}>
+        <TouchableOpacity style={styles.botom} onPress={() => postUsuario()}>
           <Text style={styles.txtbotom}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
