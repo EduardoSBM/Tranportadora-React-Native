@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { database, doc} from '../configs/firebaseConfig';
+import { onSnapshot, collection } from 'firebase/firestore';
 
 export default function Login({ navigation }) {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
- 
 
+  const [data, setData] = useState([]);
+ 
   async function Submit() {
+    const dataCollection = collection(database, 'Usuario') //conecta ao banco
+    const listen = onSnapshot(dataCollection, (query) => { //"listen", basicamente pega os valores do banco para colocar em uma array
+      const list = [] 
+      query.forEach((doc) => {
+        list.push({...doc.data(), id: doc.id}) //coloca as info na array
+      })
+      setData(list) 
+      return() => listen()
+    })
 
     if (username === 'dudu' && password === '1234') {
       navigation.navigate('Home');
