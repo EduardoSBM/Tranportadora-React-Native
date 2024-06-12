@@ -24,8 +24,9 @@ export default function Suporte({ navigation }) {
         </View>
       </View> 
 
+      <Text style={styles.Text2}>Problemas comuns:</Text>
+
       <View style={[styles.square2, styles.white]}>
-          <Text style={styles.Text2}>Problemas comuns:</Text>
           <Text style={styles.Text4}>
           -- Tenho problemas com o cadastro da minha demanda
 
@@ -43,6 +44,9 @@ export default function Suporte({ navigation }) {
 
           --  Minha demanda chegou com erro?
           </Text>
+
+          <Text style={styles.Text3}>Não conseguiu resolver seu problema?</Text>
+          <Text style={styles.Text5}>Entre em contato conosco:</Text>
         </View>
 
     </View>
@@ -143,11 +147,10 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   Text3: {
-    color: 'black',
-    textAlign: "center",
+    color: 'red',
     fontSize: 34,
-    marginTop: 20,
-    marginBottom: 55,
+    marginTop: 30,
+    marginBottom: 10,
   },
   Text4: {
     color: 'blue',
@@ -156,6 +159,12 @@ const styles = StyleSheet.create({
     marginBottom: 30,
 
   },
+  Text5: {
+    color: 'gray',
+    fontsize: 10,
+    marginTop: 5,
+    marginBottom:10
+  }
   red: {
     backgroundColor: 'red',
   },
