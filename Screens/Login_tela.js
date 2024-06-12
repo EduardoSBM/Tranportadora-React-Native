@@ -7,22 +7,9 @@ import axios from 'axios';
 export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+ 
 
   async function Submit() {
-    /* const response = await axios.get('http://localhost:3000/usuario');
-    setData(response.data.usuario);
-
-    Response.map(response => () => {
-      if (Response.map.login === username && Response.map.senha === password){
-        navigation.navigate('Home');
-        setUsername('');
-        setPassword('');
-      }
-      else{
-        alert('dados inválidos')
-      }
-    }) */ 
-    //tentativa de validação com banco falha, vejo melhor depois
 
     if (username === 'dudu' && password === '1234') {
       navigation.navigate('Home');
@@ -158,4 +145,5 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
+  
 });
