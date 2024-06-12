@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import axios from 'axios';
 
 export default function Login({ navigation }) {
   const [username, setUsername] = useState('');
