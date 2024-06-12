@@ -163,8 +163,8 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontsize: 10,
     marginTop: 5,
-    marginBottom:10
-  }
+    marginBottom:10,
+  },
   red: {
     backgroundColor: 'red',
   },
