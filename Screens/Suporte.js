@@ -47,6 +47,15 @@ export default function Suporte({ navigation }) {
 
           <Text style={styles.Text3}>Não conseguiu resolver seu problema?</Text>
           <Text style={styles.Text5}>Entre em contato conosco:</Text>
+          <Image
+              style={styles.Mail}
+              source={require('../ft/mail.png')}
+            />
+          <Text style={styles.Text6}>Maverik@gmail.com</Text>
+
+
+
+
         </View>
 
     </View>
@@ -161,9 +170,14 @@ const styles = StyleSheet.create({
   },
   Text5: {
     color: 'gray',
-    fontsize: 10,
+    fontSize: 10,
     marginTop: 5,
     marginBottom:10,
+  },
+  Text6: {
+    color:'black',
+    fontSize: 10,
+    margin: 5,
   },
   red: {
     backgroundColor: 'red',
@@ -207,5 +221,9 @@ const styles = StyleSheet.create({
   Settings: {
     width: 150,
     height: 150,
+  },
+  Mail: {
+    width: 50,
+    height: 50,
   },
 });
