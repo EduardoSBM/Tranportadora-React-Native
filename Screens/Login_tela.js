@@ -27,7 +27,13 @@ export default function Login({ navigation }) {
       navigation.navigate('Home');
       setUsername('');
       setPassword('');
-    } else {
+    } 
+    else if (username === 'adm' && password === 'adm'){
+      navigation.navigate('Home');// entrada de adm
+      setUsername('');
+      setPassword('');
+    }
+    else {
       alert('Dados inválidos');
     }
   }

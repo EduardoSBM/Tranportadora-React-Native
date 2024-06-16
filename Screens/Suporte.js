@@ -1,96 +1,135 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { database, doc, deleteDoc } from '../configs/firebaseConfig';
+import { onSnapshot, collection } from 'firebase/firestore';
+import { FlatList } from 'react-native-gesture-handler';
 
-export default function Suporte({ navigation }) {
+export default function Pesquisa({ navigation }) {
+
   return (
-
     <View style={styles.container}>
-      <View style={styles.form}>
-        <View style={styles.inputContainer}>
+      <View style={styles.campoPesquisa}>
         <TextInput
-        style={styles.input}
-        placeholder='Tem algum problema? Procure aqui'
-        placeholderTextColor="gray"
-        id='serach'
-        value={serach}
-        onChange={e => setSerach(e.target.value)}
+          style={styles.inputContainer}
+          placeholder='Pesquise a demanda pelo código:'
+          placeholderTextColor="gray"
         />
-        </View>
-        <View style={[styles.square1, styles.red]}>
-          <Image
-            style={styles.lupa}
-            source={require('../ft/lupa.png')}
-          />
-        </View>
-      </View> 
-
-      <Text style={styles.Text2}>Problemas comuns:</Text>
-
-      <View style={[styles.square2, styles.white]}>
-          <Text style={styles.Text4}>
-          -- Tenho problemas com o cadastro da minha demanda
-
-          -- Tenho problemas com a entrega da demanda
-
-          --  Tenho problemas com o pagamento da demanda
-
-          --  Preciso falar com um atendente
-
-          --  Minha demanda está atrasada
-
-          --  Minha demanda chegou danificada
-
-          --  Minha demanda foi trocada
-
-          --  Minha demanda chegou com erro?
-          </Text>
-
-          <Text style={styles.Text3}>Não conseguiu resolver seu problema?</Text>
-          <Text style={styles.Text5}>Entre em contato conosco:</Text>
-          <Image
-              style={styles.Mail}
-              source={require('../ft/mail.png')}
+        <View style={styles.square1}>
+          <TouchableOpacity >
+            <Image
+              style={styles.lupa}
+              source={require('../ft/lupa.png')}
             />
-          <Text style={styles.Text6}>Maverik@gmail.com</Text>
-
-
-
-
+          </TouchableOpacity>
         </View>
-
+      </View>
+      <View style={styles.viewTextProblema}>
+        <Text style={styles.TextProblema}> Problemas comuns:</Text>
+      </View>
+      <View style={styles.square}>
+        <View style={styles.textgeral}>
+          <Text style={styles.text}>* Tenho problemas com o cadastro da minha demanda</Text>
+          <Text style={styles.text}>* Tenho problemas com a entrega da demanda</Text>
+          <Text style={styles.text}>* Tenho problemas com o pagamento da demanda</Text>
+          <Text style={styles.text}>* Preciso falar com um humano</Text>
+          <Text style={styles.text}>* Minha demanda está atrasada</Text>
+          <Text style={styles.text}>* Minha demanda chegou danificada</Text>
+          <Text style={styles.text}>* Minha demanda chegou errada</Text>
+        </View>
+        <View style={styles.naoresolveu}>
+          <Text style={styles.textT}>Não conseguiu resolver seu problema ?</Text>
+          <Text style={styles.textTt}>Entre em contato conosco:</Text>
+        </View>
+        <View style={styles.viewcntt}>
+          <View style={styles.cntt}>
+            <View style={styles.viewmail}>
+              <Image
+                style={styles.imgmail}
+                source={require('../ft/mail.png')}
+              />
+            </View>
+            <View style={styles.viewTxt1}>
+              <Text style={styles.txt1}>Maverik@gmail.com</Text>
+            </View>
+          </View>
+          <View style={styles.cntt}>
+            <View style={styles.viewphone}>
+              <Image
+                style={styles.imgphone}
+                source={require('../ft/phone.png')}
+              />
+            </View>
+            <View style={styles.viewTxt1}>
+              <Text style={styles.txt1}>(48) 2732-3174</Text>
+            </View>
+          </View>
+          <View style={styles.cntt}>
+            <View style={styles.viewzapzap}>
+              <Image
+                style={styles.imgzapzap}
+                source={require('../ft/zapzap.png')}
+              />
+            </View>
+            <View style={styles.viewTxt1}>
+              <Text style={styles.txt1}>(48) 93842-7473</Text>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '100%',
     display: 'flex',
   },
-  TextTop1: {
-    color: 'black',
-    textAlign: "center",
-    fontSize: 30,
-    marginTop: -10,
-    marginLeft: -30,
+  input: {
+    flex: 1,
+    paddingHorizontal: 10
   },
-  TextTop2: {
-    color: 'black',
-    textAlign: "center",
-    fontSize: 30,
-    marginLeft: 25,
-    marginBottom: 20,
-  },
-  row: {
+  campoPesquisa: {
+    width: '100%',
+    alignItems: 'center',
     flexDirection: 'row',
-    marginBottom: 10,
+    margin: 10,
+  },
+  inputContainer: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 25,
+    margin: 5,
+    width: 20,
+    height: 45,
+    backgroundColor: 'white', // Para garantir que a sombra seja visível
+    shadowColor: 'gray',  // Cor da sombra
+    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
+    shadowOpacity: 0.75,  // Opacidade da sombra
+    shadowRadius: 3.84,  // Raio da sombra
+    elevation: 5,  // Para Android, adiciona elevação
+  },
+  lupa: {
+    width: 30,
+    height: 30,
+  },
+  viewTextProblema: {
+    width: '92%',
+    height: '5%',
+    justifyContent: 'center',
+    margin: 15,
+  },
+  TextProblema: {
+    fontSize: 25,
+    fontStyle: 'italic',
   },
   square1: {
-    width: "45%", // Defina o tamanho padrão dos quadrados
-    aspectRatio: 0.65, // Mantém a proporção quadrada
+    width: 70,
+    height: 40, // Mantém a proporção quadrada
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
@@ -102,9 +141,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,  // Raio da sombra
     elevation: 5,  // Para Android, adiciona elevação
   },
-  square2: {
-    width: "90%", // Defina o tamanho padrão dos quadrados
-    aspectRatio: 0.65, // Mantém a proporção quadrada
+  square: {
+    width: 370,
+    height: 500,
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
@@ -115,115 +154,86 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,  // Raio da sombra
     elevation: 5,  // Para Android, adiciona elevação
   },
-  square3: {
-    width: "45%", // Defina o tamanho padrão dos quadrados
-    aspectRatio: 0.65, // Mantém a proporção quadrada
-    borderRadius: 15,
-    marginHorizontal: 5,
-    alignItems: "center",
-    backgroundColor: 'white', // Para garantir que a sombra seja visível
-    shadowColor: 'gray',  // Cor da sombra
-    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
-    shadowOpacity: 1.25,  // Opacidade da sombra
-    shadowRadius: 3.84,  // Raio da sombra
-    elevation: 5,  // Para Android, adiciona elevação
+  textgeral: {
+    margin: 10,
+    width: '95%',
+    height: '40%',
   },
-  square4: {
-    width: "45%", // Defina o tamanho padrão dos quadrados
-    aspectRatio: 0.65, // Mantém a proporção quadrada
-    borderRadius: 15,
-    marginHorizontal: 5,
-    alignItems: "center",
-    backgroundColor: 'white', // Para garantir que a sombra seja visível
-    shadowColor: 'gray',  // Cor da sombra
-    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
-    shadowOpacity: 2.25,  // Opacidade da sombra
-    shadowRadius: 3.84,  // Raio da sombra
-    elevation: 5,  // Para Android, adiciona elevação
-  },
-  Text1: {
-    color: 'white',
-    fontSize: 26,
-    marginTop: 12,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  Text2: {
-    color: 'black',
-    fontSize: 22,
-    marginTop: 32,
-    textAlign: "center",
-    marginBottom: 30,
-  },
-  Text3: {
-    color: 'red',
-    fontSize: 34,
-    marginTop: 30,
-    marginBottom: 10,
-  },
-  Text4: {
-    color: 'blue',
+  text: {
     fontSize: 15,
-    marginTop: 30,
-    marginBottom: 30,
-
-  },
-  Text5: {
-    color: 'gray',
-    fontSize: 10,
-    marginTop: 5,
-    marginBottom:10,
-  },
-  Text6: {
-    color:'black',
-    fontSize: 10,
     margin: 5,
+    color: 'blue',
   },
-  red: {
-    backgroundColor: 'red',
+  naoresolveu: {
+    width: '95%',
+    height: '20%',
+    marginTop: 20,
   },
-  white: {
-    backgroundColor: 'white',
+  textT: {
+    marginHorizontal: 5,
+    fontSize: 18,
+    marginTop: 10,
+    color: 'red',
   },
-  gray: {
-    backgroundColor: '#607274',
+  textTt: {
+    marginHorizontal: 5,
+    fontSize: 14,
+    color: 'gray',
   },
-  viewBox: {
-    width: "80%",
-    height: "55%",
+  viewcntt:{
+    width: '100%',
+    height: '80%',
+    marginTop: -20,
   },
-  viewLupa: {
-    width: "77.5%",
-    height: "50%",
-    justifyContent: 'center',
+  cntt: {
+    width: '100%',
+    height: '10%',
+    margin: 5,
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  viewSuport: {
-    width: "77.5%",
-    height: "50%",
+  viewmail: {
+    height: '100%',
+    width: '20%',
+    alignItems: "center",
+    justifyContent: 'center',
+    marginLeft: 18,
   },
-  viewSettings: {
-    width: "77.5%",
-    height: "50%",
-  },
-  box: {
-    width: 150,
-    height: 150,
-  },
-  lupa: {
-    width: 150,
-    height: 150,
-  },
-  Suport: {
-    width: 150,
-    height: 150,
-  },
-  Settings: {
-    width: 150,
-    height: 150,
-  },
-  Mail: {
-    width: 50,
+  imgmail: {
     height: 50,
+    width: 50,
+  },
+  viewphone: {
+    height: '100%',
+    width: '20%',
+    alignItems: "center",
+    justifyContent: 'center',
+    marginLeft: 18,
+  },
+  imgphone: {
+    height: 40,
+    width: 40,
+  },
+  viewzapzap: {
+    height: '100%',
+    width: '20%',
+    justifyContent: 'center',
+    alignItems: "center",
+    marginLeft: 18,
+  },
+  imgzapzap: {
+    height: 40,
+    width: 40,
+  },
+  viewTxt1: {
+    height: '80%',
+    width: '60%',
+    justifyContent: 'center',
+    marginLeft: 120,
+  },
+  txt1: {
+    fontSize: 14,
+    color: 'gray',
+    fontStyle: 'italic'
   },
 });

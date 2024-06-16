@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import {database, doc, deleteDoc} from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 export default function Pesquisa({ navigation }) {
 
@@ -24,19 +24,16 @@ export default function Pesquisa({ navigation }) {
   return (
 
     <View style={styles.container}>
-      <FlatList>
-      <View style={styles.form}>
-        <View style={styles.inputContainer}>
+      <View style={styles.campoPesquisa}>
         <TextInput
-        style={styles.input}
-        placeholder='Pesquise pelo código'
+        style={styles.inputContainer}
+        placeholder='Pesquise a demanda pelo código:'
         placeholderTextColor="gray"
         id='serach'
-        value={serach}
+        value={pesquisa}
         onChange={e => setSerach(e.target.value)}
         />
-        </View>
-        <View style={[styles.square1, styles.red]}>
+        <View style={styles.square1}>
           <TouchableOpacity onPress={PesquisaDemanda}>
           <Image
             style={styles.lupa}
@@ -45,7 +42,103 @@ export default function Pesquisa({ navigation }) {
           </TouchableOpacity>
         </View>
       </View> 
-     </FlatList>
+      <View style={styles.resultadoPesquisa}>
+        <ScrollView>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          
+
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -61,19 +154,21 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10
   },
-  form: {
+  campoPesquisa: {
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
+    margin: 10,
   },
 
   inputContainer: {
+    flex: 1,
+    padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 25,
-    paddingHorizontal: 10,
-    marginVertical: 5,
-    width: '70%',
+    margin: 5,
+    width: 20,
     height: 45,
     backgroundColor: 'white', // Para garantir que a sombra seja visível
     shadowColor: 'gray',  // Cor da sombra
@@ -84,13 +179,13 @@ const styles = StyleSheet.create({
   },
 
   lupa: {
-    width: "30px",
-    height: "30px",
+    width: 30,
+    height: 30,
   },
 
   square1: {
-    width: "5%", // Defina o tamanho padrão dos quadrados
-    aspectRatio: 1.65, // Mantém a proporção quadrada
+    width: 70, 
+    height: 40, // Mantém a proporção quadrada
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
@@ -102,7 +197,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,  // Raio da sombra
     elevation: 5,  // Para Android, adiciona elevação
   },
-  red: {
-    backgroundColor: 'red',
+  resultadoPesquisa: {
+    width: 370, 
+    height: 600,
+    borderRadius: 15,
+    marginHorizontal: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: 'white', // Para garantir que a sombra seja visível
+    shadowColor: 'gray',  // Cor da sombra
+    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
+    shadowOpacity: 1.25,  // Opacidade da sombra
+    shadowRadius: 3.84,  // Raio da sombra
+    elevation: 5,  // Para Android, adiciona elevação
   },
 });
