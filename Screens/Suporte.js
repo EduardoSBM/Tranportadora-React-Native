@@ -4,7 +4,7 @@ import { database, doc, deleteDoc } from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function Pesquisa({ navigation }) {
+export default function Suporte({ navigation }) {
 
   return (
     <View style={styles.container}>
