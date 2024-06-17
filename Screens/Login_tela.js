@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
       setPassword('');
     } 
     else if (username === 'adm' && password === 'adm'){
-      navigation.navigate('Home');// entrada de adm
+      navigation.navigate('Menuadm');// entrada de adm
       setUsername('');
       setPassword('');
     }

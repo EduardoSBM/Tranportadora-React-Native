@@ -10,6 +10,10 @@ import Demanda from './Screens/Demanda';
 import Pesquisa from './Screens/PesquisaDemanda';
 import Suporte from './Screens/Suporte';
 import Configs from './Screens/Configs';
+import Menuadm from './Screens/Menuadm';
+import CrudDemanda from './Screens/CrudDemanda';
+import CrudMotorista from './Screens/CrudMotorista';
+import CrudCaminhao from './Screens/CrudCaminhao';
 
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -59,6 +63,10 @@ export default function Stack() {
         <Stack.Screen options={{ headerShown: true }} name='Suporte' component={Suporte} />
         <Stack.Screen options={{ headerShown: true }} name='Configs' component={Configs} />
         <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='Menuadm' component={Menuadm} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudDemanda' component={CrudDemanda} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudMotorista' component={CrudMotorista} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudCaminhao' component={CrudCaminhao} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeTabs} />
 
       </Stack.Navigator>
