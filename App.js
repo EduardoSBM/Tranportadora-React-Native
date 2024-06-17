@@ -14,6 +14,12 @@ import Menuadm from './Screens/Menuadm';
 import CrudDemanda from './Screens/CrudDemanda';
 import CrudMotorista from './Screens/CrudMotorista';
 import CrudCaminhao from './Screens/CrudCaminhao';
+import AlterarDemanda from './Screens/AlterarDemanda';
+import PesquisaouDeletaDemanda from './Screens/PesquisaouDeletaDemanda';
+import AlterarMotorista from './Screens/AlterarMotorista';
+import PesquisaouDeletaMotorista from './Screens/PesquisaouDeletaMotorista';
+import AlterarCaminhao from './Screens/AlterarCaminhao';
+import PesquisaouDeletaCaminhao from './Screens/PesquisaouDeletaCaminhao';
 
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -67,6 +73,12 @@ export default function Stack() {
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudDemanda' component={CrudDemanda} />
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudMotorista' component={CrudMotorista} />
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudCaminhao' component={CrudCaminhao} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='AlterarDemanda' component={AlterarDemanda} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='PesquisaouDeletaDemanda' component={PesquisaouDeletaDemanda} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='AlterarMotorista' component={AlterarMotorista} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='PesquisaouDeletaMotorista' component={PesquisaouDeletaMotorista} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='AlterarCaminhao' component={AlterarCaminhao} />
+        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='PesquisaouDeletaCaminhao' component={PesquisaouDeletaCaminhao} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeTabs} />
 
       </Stack.Navigator>
