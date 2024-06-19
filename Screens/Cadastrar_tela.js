@@ -35,7 +35,7 @@ export default function Cadastro({ navigation }) {
           source={require('../ft/MAVERIK.png')}
         />
       </View>
-      <Text style={styles.txt}>Realize seu cadstro!</Text>
+      <Text style={styles.txt}>Realize seu cadastro!</Text>
       <View style={styles.form}>
         <View style={styles.inputContainer}>
           <Feather name="user" size={24} color="red" />
@@ -88,7 +88,7 @@ export default function Cadastro({ navigation }) {
 
       <TouchableOpacity style={styles.cadstreaqdiv} 
         onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.cadastreaq} >Sing in!</Text>
+        <Text style={styles.cadastreaq} >Sign in!</Text>
       </TouchableOpacity>
     </View>
   );

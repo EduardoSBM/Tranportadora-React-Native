@@ -112,9 +112,9 @@ export default function AlterarDemanda({ navigation }) {
                                             <Text style={styles.modalTextT}>COLETA A :</Text>
                                             <Text style={styles.modalText}>Remetente leva na transportadora</Text>
                                             <Text style={styles.modalTextT}>COLETA B :</Text>
-                                            <Text style={styles.modalText}>Transposrtadora busca no endereço do remetente</Text>
+                                            <Text style={styles.modalText}>Transportadora busca no endereço do remetente</Text>
                                             <Text style={styles.modalTextT}>ENTREGA A : </Text>
-                                            <Text style={styles.modalText}>Destinatário pega na transpotadora</Text>
+                                            <Text style={styles.modalText}>Destinatário pega na transportadora</Text>
                                             <Text style={styles.modalTextT}>ENTREGA B : </Text>
                                             <Text style={styles.modalText}>Transportadora leva ao endereço do destinatário</Text>
 
