@@ -5,7 +5,7 @@ export default function Menuadm({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.viewtext}>
-                <Text style={styles.text}>Escolha o que dejesa gerenciar!</Text>
+                <Text style={styles.text}>Escolha o que deseja gerenciar!</Text>
             </View>
             <View style={styles.escolhageral}>
                 <View style={styles.view}>

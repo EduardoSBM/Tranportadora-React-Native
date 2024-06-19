@@ -1,30 +1,44 @@
 import React, { useState }  from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import {database, doc, deleteDoc} from '../configs/firebaseConfig';
-import { onSnapshot, collection } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { database,doc,deleteDoc,collection } from '../configs/firebaseConfig';
+import Pesquisa from './PesquisaDemanda';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function PesquisaouDeletaCaminhao({ navigation }) {
 
-  const [pesquisa, setPesquisa] = useState([])
+  const [pesquisa, setPesquisa] = useState(null)
+
 
   function PesquisaDemanda(){
-    const PesquisaDemanda = collection(database, 'Tasks') 
+    const PesquisaDemanda = collection(database, 'Caminhao') 
     const listen = onSnapshot(PesquisaDemanda, (query) => { 
+=======
+  function PesquisaouDeletaCaminhao(){
+    const PesquisaouDeletaCaminhao = collection(database, 'Tasks') 
+    const listen = onSnapshot(PesquisaouDeletaCaminhao, (query) => { 
+>>>>>>> 6f3f5ac2d32e03134d0d9676ccfee9a0adfe82b5
       const list = [] 
       query.forEach((doc) => {
         list.push({...doc.data(), id: doc.id}) 
       })
       setPesquisa(list) 
     })
-    return () => listen();
-  } 
+  }
+
+  function deleteCaminhao(id){
+        
+    const taskDocRef = doc(database, "Caminhao", id);
+    deleteDoc(taskDocRef)
+    
+}
 
 
   return (
 
     <View style={styles.container}>
-      <View style={styles.campoPesquisa}>
+      <View style={styles.campoPesquisa}> 
         <TextInput
         style={styles.inputContainer}
         placeholder='Pesquise o motorista pelo código:'
@@ -34,114 +48,57 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
         onChange={e => setSerach(e.target.value)}
         />
         <View style={styles.square1}>
-          <TouchableOpacity onPress={PesquisaDemanda}>
+          <TouchableOpacity onPress={PesquisaouDeletaCaminhao}>
           <Image
             style={styles.lupa}
             source={require('../ft/lupa.png')}
           />
           </TouchableOpacity>
-        </View>
+        </View>  
       </View> 
+
+      
       <View style={styles.resultadoPesquisa}>
         <ScrollView>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          
+          <FlatList
+            data = {pesquisa}
+            renderItem={({item})=> {
+              return(
+                <View>
+                  <Text>
+                    {item.capacidade}
+                    {item.codmotorista}
+                    {item.kmrodados}
+                    {item.marca}
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.btnDeleteTask}
+                    onPress={()=>{
+                      deleteCaminhao(item.id)
+                    }}>
+                    <AntDesign name="delete" size={24} color="#373D20" />
+                </TouchableOpacity>
+                </View>
+              )
+            }}
+          />
 
+        <Text
+                style={styles.txtdescription}
+                onPress={()=> {
+                    navigation.navigate("Details",{
+                        id:item.id,
+                        description:item.description
+                    })
+                }}>
+                    {item.description}
+                </Text>
         </ScrollView>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
