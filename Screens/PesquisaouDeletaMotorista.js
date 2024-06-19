@@ -8,9 +8,9 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
 
-  function PesquisaDemanda(){
-    const PesquisaDemanda = collection(database, 'Tasks') 
-    const listen = onSnapshot(PesquisaDemanda, (query) => { 
+  function PesquisaouDeletaMotorista(){
+    const PesquisaouDeletaMotorista = collection(database, 'Tasks') 
+    const listen = onSnapshot(PesquisaouDeletaMotorista, (query) => { 
       const list = [] 
       query.forEach((doc) => {
         list.push({...doc.data(), id: doc.id}) 
@@ -34,7 +34,7 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
         onChange={e => setSerach(e.target.value)}
         />
         <View style={styles.square1}>
-          <TouchableOpacity onPress={PesquisaDemanda}>
+          <TouchableOpacity onPress={PesquisaouDeletaMotorista}>
           <Image
             style={styles.lupa}
             source={require('../ft/lupa.png')}
