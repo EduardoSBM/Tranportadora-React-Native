@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
 
 
         <View style={[styles.square4, styles.gray]}>
-          <Text style={styles.Text4} >Configs do aplicativo!</Text>
+          <Text style={styles.Text4} >Configs do aplicativo</Text>
           <View style={styles.viewSettings}>
           <TouchableOpacity onPress={() => navigation.navigate('Configs')}>
             <Image
