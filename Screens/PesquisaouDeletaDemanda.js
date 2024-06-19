@@ -44,99 +44,16 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
       </View> 
       <View style={styles.resultadoPesquisa}>
         <ScrollView>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          <Text>faz com que a demanda apareça aqui</Text>
-          
-
+        <Text
+                style={styles.txtdescription}
+                onPress={()=> {
+                    navigation.navigate("Details",{
+                        id:item.id,
+                        description:item.description
+                    })
+                }}>
+                    {item.description}
+                </Text>
         </ScrollView>
       </View>
     </View>
