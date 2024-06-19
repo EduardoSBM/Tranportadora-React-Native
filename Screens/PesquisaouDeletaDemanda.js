@@ -8,9 +8,9 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
 
-  function PesquisaouDeletaDemanda(){
-    const PesquisaouDeletaDemanda = collection(database, 'Tasks') 
-    const listen = onSnapshot(PesquisaouDeletaDemanda, (query) => { 
+  function PesquisaDemanda(){
+    const PesquisaDemanda = collection(database, 'Tasks') 
+    const listen = onSnapshot(PesquisaDemanda, (query) => { 
       const list = [] 
       query.forEach((doc) => {
         list.push({...doc.data(), id: doc.id}) 
@@ -34,7 +34,7 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
         onChange={e => setSerach(e.target.value)}
         />
         <View style={styles.square1}>
-          <TouchableOpacity onPress={PesquisaouDeletaDemanda}>
+          <TouchableOpacity onPress={PesquisaDemanda}>
           <Image
             style={styles.lupa}
             source={require('../ft/lupa.png')}
@@ -44,16 +44,99 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
       </View> 
       <View style={styles.resultadoPesquisa}>
         <ScrollView>
-        <Text
-                style={styles.txtdescription}
-                onPress={()=> {
-                    navigation.navigate("Details",{
-                        id:item.id,
-                        description:item.description
-                    })
-                }}>
-                    {item.description}
-                </Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          <Text>faz com que a demanda apareça aqui</Text>
+          
+
         </ScrollView>
       </View>
     </View>
