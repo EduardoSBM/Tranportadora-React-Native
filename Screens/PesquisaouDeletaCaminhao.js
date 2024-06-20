@@ -11,14 +11,9 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
   const [pesquisa, setPesquisa] = useState(null)
 
 
-  function PesquisaDemanda(){
-    const PesquisaDemanda = collection(database, 'Caminhao') 
-    const listen = onSnapshot(PesquisaDemanda, (query) => { 
-=======
   function PesquisaouDeletaCaminhao(){
-    const PesquisaouDeletaCaminhao = collection(database, 'Tasks') 
+    const PesquisaouDeletaCaminhao = collection(database, 'Caminhao') 
     const listen = onSnapshot(PesquisaouDeletaCaminhao, (query) => { 
->>>>>>> 6f3f5ac2d32e03134d0d9676ccfee9a0adfe82b5
       const list = [] 
       query.forEach((doc) => {
         list.push({...doc.data(), id: doc.id}) 
@@ -67,7 +62,6 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
                 <View>
                   <Text>
                     {item.capacidade}
-                    {item.codmotorista}
                     {item.kmrodados}
                     {item.marca}
                   </Text>
