@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View, ScrollView, Alert, Modal, Pressable } from 'react-native';
-import { Feather, Fontisto, MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
+import { Feather, Fontisto, MaterialIcons, FontAwesome5, FontAwesome, Entypo } from '@expo/vector-icons';
 import { CheckBox } from 'react-native-elements';
+import {database, doc, auth, updateDoc, collection } from '../configs/firebaseConfig'; 
 
 export default function AlterarDemanda({ navigation }) {
     const [remetente, setRemetente] = useState('');
@@ -12,13 +13,47 @@ export default function AlterarDemanda({ navigation }) {
     const [volume, setVolume] = useState('');
     const [destinatario, setDestinatario] = useState('');
     const [enderecoDestinatario, setEnderecoDestinatario] = useState('');
+    const [id, setId] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedMethod, setSelectedMethod] = useState(null);
 
     const methods = ['A', 'B', 'C', 'D', 'E'];
 
+    function edit() {
+        try{
+          const demandaRef = doc(database, 'Demanda', id)
+          updateDoc(demandaRef, {
+            id: id,
+            carga: carga,
+            destinatario: destinatario,
+            endereciDestinatario: enderecoDestinatario,
+            enderecoRemetente: enderecoRemetente,
+            peso: pesoCarga,
+            volume: volume,
+            remetente: remetente,
+            valor: valorCargaSegurada,
+            metodoEntrega: selectedMethod,
+          })
+          alert('Editado com sucesso')
+          navigation.navigate('Menuadm')
+        } 
+        catch (e) {
+          alert((e))
+        }
+      }
+
     return (
         <ScrollView style={styles.container}>
+            <View style={styles.inputContainer}>
+                <FontAwesome name="code" size={24} color="red" />
+                <TextInput
+                    style={styles.input}
+                    placeholder="codigo: "
+                    placeholderTextColor="gray"
+                    value={id}
+                    onChangeText={setId}
+                />
+            </View>
             <View style={styles.square}>
                 <View style={styles.inputContainer}>
                     <Feather name="user" size={24} color="red" />

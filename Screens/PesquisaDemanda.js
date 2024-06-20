@@ -7,18 +7,18 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Pesquisa({ navigation }) {
 
-  const [pesquisa, setPesquisa, deletePesquisa] = useState([])
+  const [pesquisa, setPesquisa] = useState([])
 
   function PesquisaDemanda(){ 
-    const user = auth.currentUser;
+    /* const user = auth.currentUser;
         if (!user) {
             console.error('nenhum user logado');
             return;
-        }
+        } */
 
-        const tasksCollection = collection(database, "Transportadora");
-        const q = query(tasksCollection, where("idUser", "==", user.uid)); //ta filtrando por user id e n ta monstrando os valor
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const demanda = collection(database, "Demanda");
+        //const q = query(demanda, where("idUser", "==", user.uid)); 
+        const unsubscribe = onSnapshot(demanda,/* q, */ (querySnapshot) => {
             const list = [];
             querySnapshot.forEach((doc) => {
                 list.push({ ...doc.data(), id: doc.id });
