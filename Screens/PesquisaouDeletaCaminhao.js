@@ -10,7 +10,7 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
   const [pesquisa, setPesquisa] = useState(null)
 
 
-  function search(){
+  function Search(){
     const caminhao = collection(database, 'Caminhao') 
     const listen = onSnapshot(caminhao, (query) => { 
       const list = [] 
@@ -42,7 +42,7 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
         onChange={e => setSerach(e.target.value)}
         />
         <View style={styles.square1}>
-          <TouchableOpacity onPress={search}>
+          <TouchableOpacity onPress={Search}>
           <Image
             style={styles.lupa}
             source={require('../ft/lupa.png')}
