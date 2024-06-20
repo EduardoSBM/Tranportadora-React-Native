@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View, ScrollView, Alert, Modal, Pressable } from 'react-native';
 import { Feather, Fontisto, MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
 import { CheckBox } from 'react-native-elements';
+import {database, doc, auth, addDoc, collection } from '../configs/firebaseConfig'; 
+import { DebugInstructions } from 'react-native/Libraries/NewAppScreen';
 
 export default function Demanda({ navigation }) {
   const [remetente, setRemetente] = useState('');
@@ -16,6 +18,32 @@ export default function Demanda({ navigation }) {
   const [selectedMethod, setSelectedMethod] = useState(null);
 
   const methods = ['A', 'B', 'C', 'D', 'E'];
+
+  function addDemanda() {
+    try {
+      /* const user = auth.currentUser; // Obtém o usuário atualmente autenticado
+      if (!user) {
+        throw new Error('No user is authenticated');
+      } */
+      const tasksCollection = collection(database, "Demanda");
+      addDoc(tasksCollection, {
+        carga: carga,
+        destinatario: destinatario,
+        endereciDestinatario: enderecoDestinatario,
+        enderecoRemetente: enderecoRemetente,
+        peso: pesoCarga,
+        volume: volume,
+        remetente: remetente,
+        valor: valorCargaSegurada,
+        metodoEntrega: selectedMethod,
+        //idUser: user.uid,
+      });
+      navigation.navigate('Home');
+      Alert.alert('Demanda solicitada')
+    } catch (error) {
+      console.error("Erro solicitar demanda: ", error);
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -185,7 +213,10 @@ export default function Demanda({ navigation }) {
           />
         </View>
         <View>
-          <TouchableOpacity style={styles.botom}>
+          <TouchableOpacity 
+            style={styles.botom}
+            onPress={addDemanda}
+          >
             <Text style={styles.txtbotom}>Solicitar demanda</Text>
           </TouchableOpacity>
         </View>
