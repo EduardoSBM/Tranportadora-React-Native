@@ -3,23 +3,38 @@ import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'reac
 import {database, doc, deleteDoc} from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Pesquisa({ navigation }) {
 
-  const [pesquisa, setPesquisa] = useState([])
+  const [pesquisa, setPesquisa, deletePesquisa] = useState([])
 
-  function PesquisaDemanda(){
-    const PesquisaDemanda = collection(database, 'Tasks') 
-    const listen = onSnapshot(PesquisaDemanda, (query) => { 
-      const list = [] 
-      query.forEach((doc) => {
-        list.push({...doc.data(), id: doc.id}) 
-      })
-      setPesquisa(list) 
-    })
-    return () => listen();
+  function PesquisaDemanda(){ 
+    const user = auth.currentUser;
+        if (!user) {
+            console.error('nenhum user logado');
+            return;
+        }
+
+        const tasksCollection = collection(database, "Transportadora");
+        const q = query(tasksCollection, where("idUser", "==", user.uid)); //ta filtrando por user id e n ta monstrando os valor
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const list = [];
+            querySnapshot.forEach((doc) => {
+                list.push({ ...doc.data(), id: doc.id });
+            });
+            setPesquisa(list);
+        });
+
+        return () => unsubscribe();
   } 
 
+  function deletePesquisa(id){
+        
+    const taskDocRef = doc(database, "Demanda", id);
+    deleteDoc(taskDocRef)
+    
+}
 
   return (
 
@@ -31,7 +46,7 @@ export default function Pesquisa({ navigation }) {
         placeholderTextColor="gray"
         id='serach'
         value={pesquisa}
-        onChange={e => setSerach(e.target.value)}
+        onChangeText={setPesquisa}
         />
         <View style={styles.square1}>
           <TouchableOpacity onPress={PesquisaDemanda}>
@@ -44,16 +59,59 @@ export default function Pesquisa({ navigation }) {
       </View> 
       <View style={styles.resultadoPesquisa}>
         <ScrollView>
-        <Text
-                style={styles.txtdescription}
-                onPress={()=> {
-                    navigation.navigate("Details",{
-                        id:item.id,
-                        description:item.description
-                    })
-                }}>
-                    {item.description}
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={pesquisa}
+          renderItem={({item} )=>{
+            return(
+            <View style={styles.tasks}>
+                <TouchableOpacity
+                    style={styles.btnDeletePesquisa}
+                    onPress={()=>{
+                        deletePesquisa(item.id)
+                    }}>
+                    <AntDesign name="delete" size={24} color="#373D20" />
+                </TouchableOpacity>
+                <Text>
+                <View style={styles.valordemanda}>
+                  <View style={styles.valordemandacod}>
+                    <Text style={styles.valordemandacodtxt}>{item.codigo}</Text>
+                  </View>
+                  <View style={styles.valordemandaprodtsegrd}>
+                    <Text style={styles.valordemandaprodtsegrdtxt}>{item.carga}</Text>
+                  </View>
+                  <View style={styles.valor}>
+                    <Text style={styles.valortxt}>Destinatario: {item.destinatario}</Text>
+                  </View>
+                  <View style={styles.valordemandametdpendt}>
+                    <View style={styles.valordemandametd}>
+                      <Text style={styles.valordemandametdtxt}>Endereço do destinatario: {item.enderecoDestinatario}</Text>
+                    </View>
+                    <View style={styles.valordemandapendt}>
+                      <Text style={styles.valordemandapendttext}>Endereço do remetente: {item.enderecoRemetente}</Text>
+                    </View>
+                    <View style={styles.valordemandapendt}>
+                      <Text style={styles.valordemandapendttext}>Metodo de entrega: {item.metodoEntrega}</Text>
+                    </View>
+                    <View style={styles.valordemandapendt}>
+                      <Text style={styles.valordemandapendttext}>Peso: {item.peso}</Text>
+                    </View>
+                    <View style={styles.valordemandapendt}>
+                      <Text style={styles.valordemandapendttext}>Remetente: {item.remetente}</Text>
+                    </View>
+                    <View style={styles.valordemandapendt}>
+                      <Text style={styles.valordemandapendttext}>Valor: {item.valor}</Text>
+                    </View>
+                    <View style={styles.valordemandapendt}>
+                      <Text style={styles.valordemandapendttext}>Volume: {item.volume}</Text>
+                    </View>
+                  </View>
+                  </View>
                 </Text>
+            </View>
+            )
+        }}
+        />
         </ScrollView>
       </View>
     </View>
