@@ -11,9 +11,6 @@ import Pesquisa from './Screens/PesquisaDemanda';
 import Suporte from './Screens/Suporte';
 import Configs from './Screens/Configs';
 import Menuadm from './Screens/Menuadm';
-import CrudDemanda from './Screens/CrudDemanda';
-import CrudMotorista from './Screens/CrudMotorista';
-import CrudCaminhao from './Screens/CrudCaminhao';
 import AlterarDemanda from './Screens/AlterarDemanda';
 import PesquisaouDeletaDemanda from './Screens/PesquisaouDeletaDemanda';
 import AlterarMotorista from './Screens/AlterarMotorista';
@@ -70,9 +67,6 @@ export default function Stack() {
         <Stack.Screen options={{ headerShown: true }} name='Configs' component={Configs} />
         <Stack.Screen options={{ headerShown: false }} name='Cadastro' component={Cadastro} />
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='Menuadm' component={Menuadm} />
-        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudDemanda' component={CrudDemanda} />
-        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudMotorista' component={CrudMotorista} />
-        <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='CrudCaminhao' component={CrudCaminhao} />
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='AlterarDemanda' component={AlterarDemanda} />
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='PesquisaouDeletaDemanda' component={PesquisaouDeletaDemanda} />
         <Stack.Screen options={{ headerShown: true, headerTitle:' '  }} name='AlterarMotorista' component={AlterarMotorista} />

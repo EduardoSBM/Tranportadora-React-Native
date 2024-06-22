@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import {database, doc, deleteDoc} from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
@@ -11,7 +11,7 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
   const [pesquisa, setPesquisa] = useState([])
 
   function Search(){
-    const PesquisaMotorista = collection(database, 'motorista') 
+    const PesquisaMotorista = collection(database, 'Motorista') 
     const listen = onSnapshot(PesquisaMotorista, (query) => { 
       const list = [] 
       query.forEach((doc) => {
@@ -23,14 +23,13 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
 
   function deleteMotorista(id){
         
-    const taskDocRef = doc(database, "motorista", id);
+    const taskDocRef = doc(database, "Motorista", id);
     deleteDoc(taskDocRef)
     
 }
 
 
   return (
-
     <View style={styles.container}>
       <View style={styles.campoPesquisa}>
         <TextInput
@@ -51,15 +50,21 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
         </View>
       </View> 
       <View style={styles.resultadoPesquisa}>
-        <ScrollView>
+        <Text>Clique no motorista para alterar</Text>
         <FlatList
-            data = {pesquisa}
-            renderItem={({item})=> {
-              return(
+          data = {pesquisa}
+          renderItem={({item})=> {
+            return(
+              <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('AlterarMotorista', {
+                  id: item.id,
+                  nome: item.nome,
+                  cpf: item.cpf,
+                  cargahoraria: item.cargahoraria,
+                })
+              }}>
                 <View style={styles.valordemanda}>
-                  <View style={styles.valordemandacod}>
-                   
-                  </View>
                   <View style={styles.valordemandaprodtsegrd}>
                     <Text style={styles.valordemandaprodtsegrdtxt}>{item.nome}</Text>
                   </View>
@@ -79,10 +84,10 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
                     <AntDesign name="delete" size={24} color="#373D20" />
                 </TouchableOpacity>
                 </View>
-              )
-            }}
-          />
-        </ScrollView>
+              </TouchableOpacity>
+            )
+          }}
+        />
       </View>
     </View>
   );

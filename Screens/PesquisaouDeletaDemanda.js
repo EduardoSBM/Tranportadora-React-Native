@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import {database, doc, deleteDoc} from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function PesquisaouDeletaDemanda({ navigation }) {
@@ -49,11 +49,26 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
         </View>
       </View> 
       <View style={styles.resultadoPesquisa}>
-        <ScrollView>
+        <Text>Clique na demanda para alterar</Text>
         <FlatList
-            data = {pesquisa}
-            renderItem={({item})=> {
-              return(
+          data = {pesquisa}
+          renderItem={({item})=> {
+            return(
+              <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('AlterarDemanda', {
+                  id: item.id,
+                  carga: item.carga,
+                  destinatario: item.destinatario,
+                  enderecoDestinatario: item.enderecoDestinatario,
+                  enderecoRemetente: item.enderecoRemetente,
+                  metodoEntrega: item.metodoEntrega,
+                  peso: item.peso,
+                  remetente: item.remetente,
+                  valor: item.valor,
+                  volume: item.volume,
+                })
+              }}>
                 <View style={styles.valordemanda}>
                   <View style={styles.valordemandacod}>
                     <Text style={styles.valordemandacodtxt}>{item.destinatario}</Text>
@@ -90,12 +105,12 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
                       deleteDemanda(item.id)
                     }}>
                     <AntDesign name="delete" size={24} color="#373D20" />
-                </TouchableOpacity>
+                  </TouchableOpacity>
                 </View>
-              )
-            }}
-          />
-        </ScrollView>
+              </TouchableOpacity>
+            )
+          }}
+        />
       </View>
     </View>
   );

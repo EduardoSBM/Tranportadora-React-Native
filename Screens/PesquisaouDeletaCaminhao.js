@@ -1,7 +1,7 @@
 import React, { useState }  from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { onSnapshot } from 'firebase/firestore';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { database,doc,deleteDoc,collection } from '../configs/firebaseConfig';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
@@ -53,11 +53,20 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
 
       
       <View style={styles.resultadoPesquisa}>
-        <ScrollView>
-          <FlatList
-            data = {pesquisa}
-            renderItem={({item})=> {
-              return(
+        <Text>Clique no caminhão para alterar</Text>
+        <FlatList
+          data = {pesquisa}
+          renderItem={({item})=> {
+            return(
+              <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('AlterarCaminhao', {
+                  id: item.id,
+                  marca: item.marca,
+                  kmrodados: item.kmrodados,
+                  capacidade: item.capacidade,
+                })
+              }}>
                 <View style={styles.valordemanda}>
                   <View style={styles.valordemandacod}>
                     <Text style={styles.valordemandacodtxt}>{item.codigo}</Text>
@@ -82,12 +91,12 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
                       deleteCaminhao(item.id)
                     }}>
                     <AntDesign name="delete" size={24} color="#373D20" />
-                </TouchableOpacity>
+                  </TouchableOpacity>
                 </View>
-              )
-            }}
-          />
-        </ScrollView>
+              </TouchableOpacity>
+            )
+          }}
+        />
       </View>
     </View>
   );

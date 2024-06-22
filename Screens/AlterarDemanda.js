@@ -1,32 +1,31 @@
 import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View, ScrollView, Alert, Modal, Pressable } from 'react-native';
-import { Feather, Fontisto, MaterialIcons, FontAwesome5, FontAwesome, Entypo } from '@expo/vector-icons';
+import { Feather, Fontisto, MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
 import { CheckBox } from 'react-native-elements';
-import {database, doc, auth, updateDoc, collection } from '../configs/firebaseConfig'; 
+import {database, doc, updateDoc, collection } from '../configs/firebaseConfig'; 
 
-export default function AlterarDemanda({ navigation }) {
-    const [remetente, setRemetente] = useState('');
-    const [enderecoRemetente, setEnderecoRemetente] = useState('');
-    const [valorCargaSegurada, setValorCargaSegurada] = useState('');
-    const [carga, setCarga] = useState('');
-    const [pesoCarga, setPesoCarga] = useState('');
-    const [volume, setVolume] = useState('');
-    const [destinatario, setDestinatario] = useState('');
-    const [enderecoDestinatario, setEnderecoDestinatario] = useState('');
-    const [id, setId] = useState('');
+export default function AlterarDemanda({ navigation, route }) {
+    const [remetente, setRemetente] = useState(route.params.remetente);
+    const [enderecoRemetente, setEnderecoRemetente] = useState(route.params.enderecoRemetente);
+    const [valorCargaSegurada, setValorCargaSegurada] = useState(route.params.valor);
+    const [carga, setCarga] = useState(route.params.carga);
+    const [pesoCarga, setPesoCarga] = useState(route.params.peso);
+    const [volume, setVolume] = useState(route.params.volume);
+    const [destinatario, setDestinatario] = useState(route.params.destinatario);
+    const [enderecoDestinatario, setEnderecoDestinatario] = useState(route.params.enderecoDestinatario);
+    const id = route.params.id;
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedMethod, setSelectedMethod] = useState(null);
+    const [selectedMethod, setSelectedMethod] = useState(route.params.metodoEntrega);
 
     const methods = ['A', 'B', 'C', 'D', 'E'];
 
-    function edit() {
+    function edit(id) {
         try{
           const demandaRef = doc(database, 'Demanda', id)
           updateDoc(demandaRef, {
-            id: id,
             carga: carga,
             destinatario: destinatario,
-            endereciDestinatario: enderecoDestinatario,
+            enderecoDestinatario: enderecoDestinatario,
             enderecoRemetente: enderecoRemetente,
             peso: pesoCarga,
             volume: volume,
@@ -44,16 +43,6 @@ export default function AlterarDemanda({ navigation }) {
 
     return (
         <ScrollView style={styles.container}>
-            <View style={styles.inputContainer}>
-                <FontAwesome name="code" size={24} color="red" />
-                <TextInput
-                    style={styles.input}
-                    placeholder="codigo: "
-                    placeholderTextColor="gray"
-                    value={id}
-                    onChangeText={setId}
-                />
-            </View>
             <View style={styles.square}>
                 <View style={styles.inputContainer}>
                     <Feather name="user" size={24} color="red" />
@@ -208,8 +197,11 @@ export default function AlterarDemanda({ navigation }) {
                     />
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.botom}>
-                        <Text style={styles.txtbotom}>Solicitar demanda</Text>
+                    <TouchableOpacity 
+                        style={styles.botom}
+                        onPress={() => edit(id)}
+                    >
+                        <Text style={styles.txtbotom}>Alterar demanda</Text>
                     </TouchableOpacity>
                 </View>
             </View>
