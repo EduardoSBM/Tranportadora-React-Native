@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, Text } from 'react-native';
+import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
+import {database, doc, updateDoc, collection } from '../configs/firebaseConfig'; 
 
 
+export default function AlterarMotoristas({ navigation, route }) {
+    const [cpf, setCpf] = useState(route.params.cpf);
+    const [nome, setNome] = useState(route.params.nome);
+    const [cargahoraria, setCargahoraria] = useState(route.params.cargahoraria);
+    const id = route.params.id;
 
-export default function AlterarMotoristas({ navigation }) {
-    const [cpf, setCpf] = useState('');
-    const [nome, setNome] = useState('');
-    const [cargahoraria, setCargahoraria] = useState('');
+    function edit(id) {
+        try{
+            const motoristaRef = doc(database, 'Motorista', id)
+            updateDoc(motoristaRef, {
+                nome: nome,
+                cpf: cpf,
+                cargahoraria: cargahoraria,
+            })
+            alert('Editado com sucesso')
+            navigation.navigate('Menuadm')
+        }
+        catch (e) {
+            alert((e))
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.top}>
@@ -35,7 +53,7 @@ export default function AlterarMotoristas({ navigation }) {
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                <FontAwesome5 name="business-time" size={24} color="red" />
+                    <FontAwesome5 name="business-time" size={24} color="red" />
                     <TextInput
                         style={styles.input}
                         placeholder="Carga Horária (hora diária): "
@@ -43,6 +61,14 @@ export default function AlterarMotoristas({ navigation }) {
                         value={cargahoraria}
                         onChangeText={setCargahoraria}
                     />
+                </View>
+                <View>
+                    <TouchableOpacity 
+                        style={styles.botom}
+                        onPress={() => edit(id)}
+                    >
+                        <Text style={styles.txtbotom}>Alterar caminão</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -101,5 +127,25 @@ const styles = StyleSheet.create({
     txt: {
         fontSize: 30,
         fontStyle: 'italic',
-    }
+    },
+    botom: {
+        width: 180,
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+        marginTop: 20,
+        backgroundColor: 'red',
+        shadowColor: 'gray',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.75,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    txtbotom: {
+        fontSize: 20,
+        color: 'white',
+    },
 });

@@ -1,14 +1,33 @@
 import React, { useState } from 'react';
-import { TextInput, StyleSheet, View, Text } from 'react-native';
+import { TextInput, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Feather, Ionicons, FontAwesome5, FontAwesome6, Entypo } from '@expo/vector-icons';
+import {database, doc, updateDoc, collection } from '../configs/firebaseConfig'; 
 
 
 
-export default function AlterarCaminhao({ navigation }) {
-    const [marca, setMarca] = useState('');
-    const [kmrodados, setKmrodados] = useState('');
-    const [codmotorista, setCodMotorista] = useState('');
-    const [capacidade, setCapacidade] = useState('');
+export default function AlterarCaminhao({ navigation, route }) {
+    const [marca, setMarca] = useState(route.params.marca);
+    const [kmrodados, setKmrodados] = useState(route.params.kmrodados);
+    const [capacidade, setCapacidade] = useState(route.params.capacidade);
+    const id = route.params.id
+
+    function edit(id) {
+        try{
+            const caminhaoRef = doc(database, 'Caminhao', id)
+            updateDoc(caminhaoRef, {
+                marca: marca,
+                kmrodados: kmrodados,
+                capacidade: capacidade,
+            })
+            alert('Editado com sucesso')
+            navigation.navigate('Menuadm')
+        }
+        catch (e) {
+            alert((e))
+        }
+    }
+
+
     return (
         <View style={styles.container}>
             <View style={styles.top}>
@@ -36,16 +55,6 @@ export default function AlterarCaminhao({ navigation }) {
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <FontAwesome6 name="drivers-license" size={24} color="red" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="código do motorista: "
-                        placeholderTextColor="gray"
-                        value={codmotorista}
-                        onChangeText={setCodMotorista}
-                    />
-                </View>
-                <View style={styles.inputContainer}>
                     <FontAwesome5 name="weight-hanging" size={24} color="red" />
                     <TextInput
                         style={styles.input}
@@ -54,6 +63,14 @@ export default function AlterarCaminhao({ navigation }) {
                         value={capacidade}
                         onChangeText={setCapacidade}
                     />
+                </View>
+                <View>
+                    <TouchableOpacity 
+                        style={styles.botom}
+                        onPress={() => edit(id)}
+                    >
+                        <Text style={styles.txtbotom}>Alterar caminão</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -112,5 +129,25 @@ const styles = StyleSheet.create({
     txt: {
         fontSize: 30,
         fontStyle: 'italic',
-    }
+    },
+    botom: {
+        width: 180,
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+        marginTop: 20,
+        backgroundColor: 'red',
+        shadowColor: 'gray',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.75,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    txtbotom: {
+        fontSize: 20,
+        color: 'white',
+    },
 });

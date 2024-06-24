@@ -2,20 +2,44 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View, ScrollView, Alert, Modal, Pressable } from 'react-native';
 import { Feather, Fontisto, MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
 import { CheckBox } from 'react-native-elements';
+import {database, doc, updateDoc, collection } from '../configs/firebaseConfig'; 
 
-export default function AlterarDemanda({ navigation }) {
-    const [remetente, setRemetente] = useState('');
-    const [enderecoRemetente, setEnderecoRemetente] = useState('');
-    const [valorCargaSegurada, setValorCargaSegurada] = useState('');
-    const [carga, setCarga] = useState('');
-    const [pesoCarga, setPesoCarga] = useState('');
-    const [volume, setVolume] = useState('');
-    const [destinatario, setDestinatario] = useState('');
-    const [enderecoDestinatario, setEnderecoDestinatario] = useState('');
+export default function AlterarDemanda({ navigation, route }) {
+    const [remetente, setRemetente] = useState(route.params.remetente);
+    const [enderecoRemetente, setEnderecoRemetente] = useState(route.params.enderecoRemetente);
+    const [valorCargaSegurada, setValorCargaSegurada] = useState(route.params.valor);
+    const [carga, setCarga] = useState(route.params.carga);
+    const [pesoCarga, setPesoCarga] = useState(route.params.peso);
+    const [volume, setVolume] = useState(route.params.volume);
+    const [destinatario, setDestinatario] = useState(route.params.destinatario);
+    const [enderecoDestinatario, setEnderecoDestinatario] = useState(route.params.enderecoDestinatario);
+    const id = route.params.id;
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedMethod, setSelectedMethod] = useState(null);
+    const [selectedMethod, setSelectedMethod] = useState(route.params.metodoEntrega);
 
     const methods = ['A', 'B', 'C', 'D', 'E'];
+
+    function edit(id) {
+        try{
+          const demandaRef = doc(database, 'Demanda', id)
+          updateDoc(demandaRef, {
+            carga: carga,
+            destinatario: destinatario,
+            enderecoDestinatario: enderecoDestinatario,
+            enderecoRemetente: enderecoRemetente,
+            peso: pesoCarga,
+            volume: volume,
+            remetente: remetente,
+            valor: valorCargaSegurada,
+            metodoEntrega: selectedMethod,
+          })
+          alert('Editado com sucesso')
+          navigation.navigate('Menuadm')
+        } 
+        catch (e) {
+          alert((e))
+        }
+      }
 
     return (
         <ScrollView style={styles.container}>
@@ -173,8 +197,11 @@ export default function AlterarDemanda({ navigation }) {
                     />
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.botom}>
-                        <Text style={styles.txtbotom}>Solicitar demanda</Text>
+                    <TouchableOpacity 
+                        style={styles.botom}
+                        onPress={() => edit(id)}
+                    >
+                        <Text style={styles.txtbotom}>Alterar demanda</Text>
                     </TouchableOpacity>
                 </View>
             </View>

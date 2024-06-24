@@ -11,7 +11,7 @@ export default function Cadastro({ navigation }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
-  function postUsuario(){
+  /* function postUsuario(){
     try{
       const userdocRef = collection(database, 'Usuario')
       addDoc(userdocRef, {
@@ -25,7 +25,7 @@ export default function Cadastro({ navigation }) {
     catch (e) {
       alert((e))
     }
-  }
+  } */
 
   return (
     <View style={styles.container}>
@@ -70,7 +70,7 @@ export default function Cadastro({ navigation }) {
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.botom} onPress={() => postUsuario()}>
+        <TouchableOpacity style={styles.botom} /* onPress={() => postUsuario()} */>
           <Text style={styles.txtbotom}>Cadastrar</Text>
         </TouchableOpacity>
       </View>

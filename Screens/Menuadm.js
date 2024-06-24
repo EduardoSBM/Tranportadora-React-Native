@@ -9,17 +9,17 @@ export default function Menuadm({ navigation }) {
             </View>
             <View style={styles.escolhageral}>
                 <View style={styles.view}>
-                    <TouchableOpacity style={styles.botom} onPress={() => navigation.navigate('CrudDemanda')}>
+                    <TouchableOpacity style={styles.botom} onPress={() => navigation.navigate('PesquisaouDeletaDemanda')}>
                         <Text style={styles.txt}>Demanda</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.view}>
-                <TouchableOpacity style={styles.botom} onPress={() => navigation.navigate('CrudMotorista')}>
+                <TouchableOpacity style={styles.botom} onPress={() => navigation.navigate('PesquisaouDeletaMotorista')}>
                         <Text style={styles.txt}>Motoristas</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.view}>
-                <TouchableOpacity style={styles.botom} onPress={() => navigation.navigate('CrudCaminhao')}>
+                <TouchableOpacity style={styles.botom} onPress={() => navigation.navigate('PesquisaouDeletaCaminhao')}>
                         <Text style={styles.txt}>Caminhões</Text>
                     </TouchableOpacity>
                 </View>

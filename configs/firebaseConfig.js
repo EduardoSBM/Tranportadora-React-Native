@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -16,4 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getFirestore(app);
 
-export {database, collection, doc, deleteDoc, addDoc, updateDoc};
+const auth = getAuth(app);
+
+export {database, collection, doc, deleteDoc, addDoc, updateDoc, auth, onAuthStateChanged};
