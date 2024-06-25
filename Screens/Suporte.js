@@ -82,6 +82,7 @@ export default function Suporte({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     alignItems: 'center',
     width: '100%',
     height: '100%',

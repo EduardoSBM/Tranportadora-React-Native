@@ -118,6 +118,7 @@ export default function Pagamento({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     alignItems: 'center',
     width: '100%',
     height: '100%',
@@ -177,12 +178,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: 'white', // Para garantir que a sombra seja visível
-    shadowColor: 'gray',  // Cor da sombra
-    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
-    shadowOpacity: 1.25,  // Opacidade da sombra
-    shadowRadius: 3.84,  // Raio da sombra
-    elevation: 5,  // Para Android, adiciona elevação
   },
   valordemanda: {
     margin: 20,
