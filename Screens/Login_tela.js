@@ -1,42 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { database, doc} from '../configs/firebaseConfig';
-import { onSnapshot, collection } from 'firebase/firestore';
+import { auth, onAuthStateChanged} from '../configs/firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Login({ navigation }) {
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [data, setData] = useState([]);
+  const [error, setError] = useState('')
  
   async function Submit() {
-    const dataCollection = collection(database, 'Usuario') //conecta ao banco
-    const listen = onSnapshot(dataCollection, (query) => { //"listen", basicamente pega os valores do banco para colocar em uma array
-      const list = [] 
-      query.forEach((doc) => {
-        list.push({...doc.data(), id: doc.id}) //coloca as info na array
-      })
-      setData(list) 
-      return() => listen()
-    })
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in:', userCredential.user);
+      navigation.navigate('Home_tela', { idUser: userCredential.user.uid }); 
 
-    if (username === 'dudu' && password === '1234') {
-      navigation.navigate('Home');
-      setUsername('');
-      setPassword('');
-    } 
-    else if (username === 'adm' && password === 'adm'){
-      navigation.navigate('Menuadm');// entrada de adm
-      setUsername('');
-      setPassword('');
+    } catch (error) {
+      console.error('Error logging in:', error);
+      //Alert.alert('Error', error.message);
+      setError(true)
     }
-    else {
-      alert('Dados inválidos');
-    }
+  };
+  useEffect(() => {
+    const statusAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.navigate("Home_tela", { idUser: user.uid });
+      }
+    });
+
+    return () => statusAuth();
+
+  },[])
+
+  {error === true
+    ?
+  <View style={styles.alert}>
+    <Ionicons name="alert-circle" size={24} color="red" />
+    <Text style={styles.txtalert}>email ou senha inválidos</Text>
+  </View>
+    :
+  <View/>
   }
+  {email === '' || password == ''
+  ?
+  <TouchableOpacity style={styles.btnLogin} disabled={true}>
+    <Text style={styles.txtbtnLogin}>Login</Text>
+  </TouchableOpacity>
+  :
+  <TouchableOpacity style={styles.btnLogin} onPress={Submit}>
+    <Text style={styles.txtbtnLogin}>Login</Text>
+  </TouchableOpacity> 
+  
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.img}>
@@ -52,10 +72,10 @@ export default function Login({ navigation }) {
           <Feather name="user" size={24} color="red" />
           <TextInput
             style={styles.input}
-            placeholder="Username: "
+            placeholder="email: "
             placeholderTextColor="gray"
-            value={username}
-            onChangeText={setUsername}
+            value={email}
+            onChangeText={setEmail}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -79,6 +99,8 @@ export default function Login({ navigation }) {
         <Text style={styles.cadastreaq} >Sing up!</Text>
       </TouchableOpacity>
     </View>
+  
+    
   );
 }
 

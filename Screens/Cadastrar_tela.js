@@ -3,29 +3,25 @@ import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View } from 'reac
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { database, collection, addDoc } from '../configs/firebaseConfig';
+import { database, collection, auth } from '../configs/firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 
 export default function Cadastro({ navigation }) {
-  const [name, setName] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  /* function postUsuario(){
-    try{
-      const userdocRef = collection(database, 'Usuario')
-      addDoc(userdocRef, {
-        nome: name,
-        login: username,
-        senha: password,
-      })
-      alert('usuario cadastrada')
-      navigation.navigate('Login')
+  async function newUser(){
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User registered:', userCredential.user);
+      alert('conta criada');
+      navigation.navigate('Login'); 
+    } catch (error) {
+      console.error('Error signing up:', error);
+      alert('Error', error.message);
     }
-    catch (e) {
-      alert((e))
-    }
-  } */
+  };
 
   return (
     <View style={styles.container}>
@@ -38,23 +34,13 @@ export default function Cadastro({ navigation }) {
       <Text style={styles.txt}>Realize seu cadastro!</Text>
       <View style={styles.form}>
         <View style={styles.inputContainer}>
-          <Feather name="user" size={24} color="red" />
-          <TextInput
-            style={styles.input}
-            placeholder="Nome: "
-            placeholderTextColor="gray"
-            value={name}
-            onChangeText={setName}
-          />
-        </View>
-        <View style={styles.inputContainer}>
           <Entypo name="login" size={22} color="red" />
           <TextInput
             style={styles.input}
-            placeholder="Login: "
+            placeholder="Email: "
             placeholderTextColor="gray"
-            value={username}
-            onChangeText={setUsername}
+            value={email}
+            onChangeText={setEmail}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -70,7 +56,7 @@ export default function Cadastro({ navigation }) {
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.botom} /* onPress={() => postUsuario()} */>
+        <TouchableOpacity style={styles.botom} onPress={newUser}>
           <Text style={styles.txtbotom}>Cadastrar</Text>
         </TouchableOpacity>
       </View>
