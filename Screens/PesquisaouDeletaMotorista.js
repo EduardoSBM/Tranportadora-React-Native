@@ -1,6 +1,6 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import {database, doc, deleteDoc} from '../configs/firebaseConfig';
+import { database, doc, deleteDoc } from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -10,84 +10,83 @@ export default function PesquisaouDeletaMotorista({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
 
-  function Search(){
-    const PesquisaMotorista = collection(database, 'Motorista') 
-    const listen = onSnapshot(PesquisaMotorista, (query) => { 
-      const list = [] 
+  function Search() {
+    const PesquisaMotorista = collection(database, 'Motorista')
+    const listen = onSnapshot(PesquisaMotorista, (query) => {
+      const list = []
       query.forEach((doc) => {
-        list.push({...doc.data(), id: doc.id}) 
+        list.push({ ...doc.data(), id: doc.id })
       })
-      setPesquisa(list) 
+      setPesquisa(list)
     })
-  } 
+  }
 
-  function deleteMotorista(id){
-        
+  function deleteMotorista(id) {
+
     const taskDocRef = doc(database, "Motorista", id);
     deleteDoc(taskDocRef)
-    
-}
+
+  }
 
 
   return (
     <View style={styles.container}>
       <View style={styles.campoPesquisa}>
         <TextInput
-        style={styles.inputContainer}
-        placeholder='Pesquise o motorista pelo código:'
-        placeholderTextColor="gray"
-        id='serach'
-        value={pesquisa}
-        onChange={e => setSerach(e.target.value)}
+          style={styles.inputContainer}
+          placeholder='Pesquise o motorista pelo código:'
+          placeholderTextColor="gray"
+          id='serach'
+          value={pesquisa}
+          onChange={e => setSerach(e.target.value)}
         />
         <View style={styles.square1}>
           <TouchableOpacity onPress={Search}>
-          <Image
-            style={styles.lupa}
-            source={require('../ft/lupa.png')}
-          />
+            <Image
+              style={styles.lupa}
+              source={require('../ft/lupa.png')}
+            />
           </TouchableOpacity>
         </View>
-      </View> 
+      </View>
       <View style={styles.resultadoPesquisa}>
-        <Text>Clique no motorista para alterar</Text>
         <FlatList
-          data = {pesquisa}
-          renderItem={({item})=> {
-            return(
-              <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('AlterarMotorista', {
-                  id: item.id,
-                  nome: item.nome,
-                  cpf: item.cpf,
-                  cargahoraria: item.cargahoraria,
-                })
-              }}>
-                <View style={styles.valordemanda}>
-                  <View style={styles.valordemandaprodtsegrd}>
-                    <Text style={styles.valordemandaprodtsegrdtxt}>{item.nome}</Text>
+          data={pesquisa}
+          renderItem={({ item }) => {
+            return (
+
+              <View style={styles.itensgeral}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('AlterarMotorista', {
+                      id: item.id,
+                      nome: item.nome,
+                      cpf: item.cpf,
+                      cargahoraria: item.cargahoraria,
+                    })
+                  }}>
+
+                  <View style={styles.nome}>
+                    <Text style={styles.nometxt}>{item.nome}</Text>
+                    <Text style={styles.cpftxt}>CPF: {item.cpf}</Text>
+                    <Text style={styles.horariotxt}>Carga Horária: {item.cargahoraria}</Text>
                   </View>
-                  <View style={styles.valor}>
-                    <Text style={styles.valortxt}>CPF: {item.cpf}</Text>
-                  </View>
-                  <View style={styles.valordemandametdpendt}>
-                    <View style={styles.valordemandametd}>
-                      <Text style={styles.valordemandametdtxt}>Carga Horária: {item.cargahoraria}</Text> 
-                    </View>
-                  </View>
+
+                </TouchableOpacity>
+                <View>
                   <TouchableOpacity
-                    style={styles.btnDeleteTask}
-                    onPress={()=>{
+                    onPress={() => {
                       deleteMotorista(item.id)
                     }}>
                     <AntDesign name="delete" size={24} color="#373D20" />
-                </TouchableOpacity>
+                  </TouchableOpacity>
                 </View>
-              </TouchableOpacity>
+              </View>
             )
+
           }}
         />
+
       </View>
     </View>
   );
@@ -134,7 +133,7 @@ const styles = StyleSheet.create({
   },
 
   square1: {
-    width: 70, 
+    width: 70,
     height: 40, // Mantém a proporção quadrada
     borderRadius: 15,
     marginHorizontal: 5,
@@ -148,23 +147,17 @@ const styles = StyleSheet.create({
     elevation: 5,  // Para Android, adiciona elevação
   },
   resultadoPesquisa: {
-    width: 370, 
+    width: 370,
     height: 600,
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: 'white', // Para garantir que a sombra seja visível
-    shadowColor: 'gray',  // Cor da sombra
-    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
-    shadowOpacity: 1.25,  // Opacidade da sombra
-    shadowRadius: 3.84,  // Raio da sombra
-    elevation: 5,  // Para Android, adiciona elevação
   },
-  valordemanda: {
-    margin: 20,
+  itensgeral: {
+    margin: 40,
     width: 320,
-    height: 190,
+    height: 180,
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
@@ -175,81 +168,24 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,  // Raio da sombra
     elevation: 5,  // Para Android, adiciona elevação
   },
-  valordemandacod: {
-    width: '100%',
-    height: '10%',
-  },
-  valordemandacodtxt: {
-    margin: 5,
-    color: 'red',
-    marginLeft: 270,
-    fontSize: 10,
-  },
-  valordemandaprodtsegrd: {
-    width: '100%',
-    height: '15%',
+  nome: {
+    width: 320,
+    height: 135,
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  valordemandaprodtsegrdtxt: {
+  nometxt: {
     fontSize: 20,
+    marginBottom: 5,
+    marginTop: 20,
   },
-  valor: {
-    width: '100%',
-    height: '15%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  valortxt: {
+  cpftxt: {
     color: 'gray',
-    fontSize: 16,
+    fontSize: 14,
     fontStyle: 'italic',
+    marginBottom: 25,
   },
-  valordemandametdpendt: {
-    width: '100%',
-    height: '22.5%',
-    flexDirection: 'row',
-  },
-  valordemandametd: {
-    width: '50%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  valordemandametdtxt: {
+  horariotxt: {
     fontSize: 16,
 
-  },
-  valordemandapendt: {
-    width: '50%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  valordemandapendttext: {
-    fontSize: 12,
-  },
-  valordemandabancoendereco: {
-    width: '100%',
-    height: '22.5%',
-    flexDirection: 'row',
-  },
-  valordemandabanco: {
-    width: '50%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  valordemandabancotxt: {
-    fontSize: 16,
-  },
-  valordemandaendereco: {
-    width: '50%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  valordemandaenderecotxt: {
-    fontSize: 15,
   },
 });

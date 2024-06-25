@@ -68,7 +68,7 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
                     volume: item.volume,
                   })
                 }}>
-                  <View style={styles.teste}>
+                  <View >
                     <View style={styles.itemcarga}>
                       <Text style={styles.itemcargatxt}>{item.carga}</Text>
                     </View>
@@ -92,7 +92,6 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={styles.btnDeleteTask}
                   onPress={() => {
                     deleteDemanda(item.id)
                   }}>
