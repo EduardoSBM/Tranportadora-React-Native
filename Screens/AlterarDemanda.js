@@ -181,6 +181,8 @@ export default function AlterarDemanda({ navigation, route }) {
                                     checkedIcon="dot-circle-o"
                                     uncheckedIcon="circle-o"
                                     checkedColor="red"
+                                    containerStyle={styles.checkBox}
+                                    textStyle={styles.checkBoxText}
                                 />
                             </View>
                         ))}
@@ -226,18 +228,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: 'center',
         backgroundColor: 'white',
-        shadowColor: 'gray',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 1.25,
-        shadowRadius: 3.84,
-        elevation: 5,
     },
     minisquare: {
         margin: 5,
         alignContent: 'center',
         alignItems: 'center',
-        width: 280,
-        height: 400,
+        width: 300,
+        height: 420,
         aspectRatio: 0.65,
         borderRadius: 15,
         marginHorizontal: 5,
@@ -356,8 +353,14 @@ const styles = StyleSheet.create({
         marginTop: 9,
     },
     checkBox: {
-        margin: 5,
-    },
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+        padding: 5,
+      },
+      checkBoxText: {
+        color: 'black',
+        marginLeft: 5,
+      },
     modalTextTT: {
         alignItems: 'center',
         fontSize: 20,

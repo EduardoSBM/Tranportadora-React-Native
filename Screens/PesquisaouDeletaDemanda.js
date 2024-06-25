@@ -1,6 +1,6 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity, Alert } from 'react-native';
-import {database, doc, deleteDoc} from '../configs/firebaseConfig';
+import { database, doc, deleteDoc } from '../configs/firebaseConfig';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -9,18 +9,18 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
 
-  function Search(){
-    const PesquisaDemanda = collection(database, 'Demanda')   
-    const listen = onSnapshot(PesquisaDemanda, (query) => { 
-      const list = [] 
+  function Search() {
+    const PesquisaDemanda = collection(database, 'Demanda')
+    const listen = onSnapshot(PesquisaDemanda, (query) => {
+      const list = []
       query.forEach((doc) => {
-        list.push({...doc.data(), id: doc.id}) 
+        list.push({ ...doc.data(), id: doc.id })
       })
-      setPesquisa(list) 
+      setPesquisa(list)
     })
-  } 
+  }
 
-  function deleteDemanda(id){
+  function deleteDemanda(id) {
 
     const taskDocRef = doc(database, "Demanda", id);
     deleteDoc(taskDocRef)
@@ -32,78 +32,85 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
     <View style={styles.container}>
       <View style={styles.campoPesquisa}>
         <TextInput
-        style={styles.inputContainer}
-        placeholder='Pesquise a demanda pelo código:'
-        placeholderTextColor="gray"
-        id='serach'
-        value={pesquisa}
-        onChange={e => setSerach(e.target.value)}
+          style={styles.inputContainer}
+          placeholder='Pesquise a demanda pelo código:'
+          placeholderTextColor="gray"
+          id='serach'
+          value={pesquisa}
+          onChange={e => setSerach(e.target.value)}
         />
         <View style={styles.square1}>
           <TouchableOpacity onPress={Search}>
-          <Image
-            style={styles.lupa}
-            source={require('../ft/lupa.png')}
-          />
+            <Image
+              style={styles.lupa}
+              source={require('../ft/lupa.png')}
+            />
           </TouchableOpacity>
         </View>
-      </View> 
-      <View style={styles.resultadoPesquisa}>
-        <ScrollView>
-        <FlatList
-            data = {pesquisa}
-            renderItem={({item})=> {
-              return(
-                <View style={styles.valordemanda}>
-                  <View style={styles.valordemandacod}>
-                    <Text style={styles.valordemandacodtxt}>{item.destinatario}</Text>
-                  </View>
-                  <View style={styles.valordemandaprodtsegrd}>
-                    <Text style={styles.valordemandaprodtsegrdtxt}>{item.carga}</Text>
-                  </View>
-                  <View style={styles.valor}>
-                    <Text style={styles.valortxt}>Endereço do destinatario: {item.enderecoDestinatario}</Text>
-                  </View>
-                  <View style={styles.valordemandametdpendt}>
-                    <View style={styles.valordemandametd}>
-                      <Text style={styles.valordemandametdtxt}>EndereçoRemetente: {item.enderecoRemetente}</Text>
-                    </View>
-                    <View style={styles.valordemandapendt}>
-                      <Text style={styles.valordemandapendttext}>Método: {item.metodoEntrega}</Text>
-                    </View>
-                    <View style={styles.valordemandabancoendereco}>
-                      <Text style={styles.valordemandabancoenderecotxt}>Peso: {item.peso}</Text>
-                    </View>
-                    <View style={styles.valordemandabanco}>
-                      <Text style={styles.valordemandabancotxt}>Remetente: {item.remetente}</Text>
-                    </View>
-                    <View style={styles.valordemandaendereco}>
-                      <Text style={styles.valordemandaenderecotxt}>Valor: {item.valor}</Text>
-                    </View>
-                    <View style={styles.valordemandavol}>
-                      <Text style={styles.valordemandavoltxt}>Volume: {item.volume}</Text>
-                    </View>
-                  </View>
-                  <TouchableOpacity
-                    style={styles.btnDeleteTask}
-                    onPress={()=>{
-                      deleteDemanda(item.id)
-                    }}>
-                    <AntDesign name="delete" size={24} color="#373D20" />
-                </TouchableOpacity>
-                </View>
-              )
-            }}
-          />
-        </ScrollView>
       </View>
-    </View>
+      <View style={styles.resultadoPesquisa}>
+        <FlatList
+          data={pesquisa}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.itensgeral}>
+                <TouchableOpacity onPress={() => {
+                  navigation.navigate('AlterarDemanda', {
+                    id: item.id,
+                    carga: item.carga,
+                    destinatario: item.destinatario,
+                    enderecoDestinatario: item.enderecoDestinatario,
+                    remetente: item.remetente,
+                    enderecoRemetente: item.enderecoRemetente,
+                    metodoEntrega: item.metodoEntrega,
+                    peso: item.peso,
+                    valor: item.valor,
+                    volume: item.volume,
+                  })
+                }}>
+                  <View style={styles.teste}>
+                    <View style={styles.itemcarga}>
+                      <Text style={styles.itemcargatxt}>{item.carga}</Text>
+                    </View>
+                    <View style={styles.itemdestinatario}>
+                      <Text style={styles.itemdestinatariotxt}>Destinatario: {item.destinatario}</Text>
+                      <Text style={styles.itemEnderecodestinatariotxt}>Endereço D: {item.enderecoDestinatario}</Text>
+                    </View>
+                    <View style={styles.itemRemetente}>
+                      <Text style={styles.itemremetentetxt}>Remetente: {item.remetente}</Text>
+                      <Text style={styles.itemEnderecoRemetentetxt}>Endereço R: {item.enderecoRemetente}</Text>
+                    </View>
+                    <View style={styles.VlPsVm}>
+                      <Text style={styles.Vltxt}>Peso: {item.peso}</Text>
+                      <Text style={styles.Pstxt}>Valor: {item.valor}</Text>
+                      <Text style={styles.Vmtxt}>Volume: {item.volume}</Text>
+                    </View>
+                    <View style={styles.Mtd}>
+                      <Text style={styles.Mtdtxt}>Método: {item.metodoEntrega}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.btnDeleteTask}
+                  onPress={() => {
+                    deleteDemanda(item.id)
+                  }}>
+                  <AntDesign name="delete" size={24} color="#373D20" />
+                </TouchableOpacity>
+              </View>
+            )
+          }}
+        />
+      </View>
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: 'white',
     width: '100%',
     height: '100%',
     display: 'flex',
@@ -142,7 +149,7 @@ const styles = StyleSheet.create({
   },
 
   square1: {
-    width: 70, 
+    width: 70,
     height: 40, // Mantém a proporção quadrada
     borderRadius: 15,
     marginHorizontal: 5,
@@ -156,23 +163,17 @@ const styles = StyleSheet.create({
     elevation: 5,  // Para Android, adiciona elevação
   },
   resultadoPesquisa: {
-    width: 370, 
+    width: 370,
     height: 600,
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: 'white', // Para garantir que a sombra seja visível
-    shadowColor: 'gray',  // Cor da sombra
-    shadowOffset: { width: 0, height: 4 },  // Deslocamento da sombra
-    shadowOpacity: 1.25,  // Opacidade da sombra
-    shadowRadius: 3.84,  // Raio da sombra
-    elevation: 5,  // Para Android, adiciona elevação
   },
-  valordemanda: {
+  itensgeral: {
     margin: 40,
     width: 320,
-    height: 240,
+    height: 260,
     borderRadius: 15,
     marginHorizontal: 5,
     alignItems: "center",
@@ -183,102 +184,78 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,  // Raio da sombra
     elevation: 5,  // Para Android, adiciona elevação
   },
-  valordemandacod: {
+  itemcarga: {
     width: '100%',
     height: '10%',
-    backgroundColor: 'red',
-  },
-  valordemandacodtxt: {
-    margin: 5,
-    color: 'red',
-    marginLeft: 270,
-    fontSize: 10,
-  },
-  valordemandaprodtsegrd: {
-    width: '100%',
-    height: '10%',
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
   },
-  valordemandaprodtsegrdtxt: {
+  itemcargatxt: {
     fontSize: 20,
-  },
-  valor: {
-    width: '100%',
-    height: '10%',
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  valortxt: {
-    color: 'gray',
-    fontSize: 16,
     fontStyle: 'italic',
   },
-  valordemandametdpendt: {
+  itemdestinatario: {
+    margin: 10,
     width: '100%',
-    height: '60%',
+    height: '10%',
     flexDirection: 'row',
-  },
-  valordemandametd: {
-    backgroundColor: 'purple',
-    width: '16,66666666666667%',
-    height: '60%',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  valordemandametdtxt: {
-    fontSize: 16,
+  itemdestinatariotxt: {
+    fontSize: 10,
+    marginLeft: -10,
   },
-  valordemandapendt: {
-    width: '16,66666666666667%',
-    height: '60%',
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
+  itemEnderecodestinatariotxt: {
+    fontSize: 10,
+    marginLeft: 50,
   },
-  valordemandapendttext: {
-    fontSize: 12,
-  },
-  valordemandabancoendereco: {
-    width: '16,66666666666667%',
-    backgroundColor: 'yellow',
-    height: '60%',
+  itemRemetente: {
+    margin: 10,
+    width: '100%',
+    height: '10%',
     flexDirection: 'row',
-  },
-  valordemandabancoenderecotxt: {
-    fontSize: 12,
-  },
-  valordemandabanco: {
-    width: '16,66666666666667%',
-    backgroundColor: 'gray',
-    height: '60%',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  valordemandabancotxt: {
-    fontSize: 16,
+  itemremetentetxt: {
+    fontSize: 10,
   },
-  valordemandaendereco: {
-    width: '16,66666666666667%',
-    height: '60%',
-    backgroundColor: 'pink',
+  itemEnderecoRemetentetxt: {
+    fontSize: 10,
+    marginLeft: 12,
+  },
+  VlPsVm: {
+    margin: 10,
+    width: '100%',
+    height: '10%',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  valordemandaenderecotxt: {
-    fontSize: 15,
+  Vltxt: {
+    fontSize: 10,
+    marginLeft: 12,
   },
-  valordemandavol: {
-    width: '16,66666666666667%',
-    height: '60%',
-    backgroundColor: 'cyan',
+  Pstxt: {
+    fontSize: 10,
+    marginLeft: 12,
+  },
+  Vmtxt: {
+    fontSize: 10,
+    marginLeft: 12,
+  },
+  Mtd: {
+    margin: 10,
+    width: '100%',
+    height: '10%',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  valordemandavoltxt: {
-    fontSize: 15,
+  Mtdtxt: {
+    fontSize: 10,
   },
 });
 
