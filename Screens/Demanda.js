@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextInput, StyleSheet, Image, TouchableOpacity, Text, View, ScrollView, Alert, Modal, Pressable } from 'react-native';
 import { Feather, Fontisto, MaterialIcons, FontAwesome5, Entypo } from '@expo/vector-icons';
 import { CheckBox } from 'react-native-elements';
-import {database, doc, auth, addDoc, collection } from '../configs/firebaseConfig'; 
+import { database, doc, auth, addDoc, collection } from '../configs/firebaseConfig';
 import { DebugInstructions } from 'react-native/Libraries/NewAppScreen';
 
 export default function Demanda({ navigation }) {
@@ -21,10 +21,6 @@ export default function Demanda({ navigation }) {
 
   function addDemanda() {
     try {
-      /* const user = auth.currentUser; // Obtém o usuário atualmente autenticado
-      if (!user) {
-        throw new Error('No user is authenticated');
-      } */
       const tasksCollection = collection(database, "Demanda");
       addDoc(tasksCollection, {
         carga: carga,
@@ -197,6 +193,8 @@ export default function Demanda({ navigation }) {
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
                   checkedColor="red"
+                  containerStyle={styles.checkBox}
+                  textStyle={styles.checkBoxText}
                 />
               </View>
             ))}
@@ -213,7 +211,7 @@ export default function Demanda({ navigation }) {
           />
         </View>
         <View>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.botom}
             onPress={addDemanda}
           >
@@ -270,12 +268,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: 'center',
-    backgroundColor: 'white',
-    shadowColor: 'gray',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 1.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   minisquare: {
     margin: 5,
@@ -401,7 +393,13 @@ const styles = StyleSheet.create({
     marginTop: 9,
   },
   checkBox: {
-    margin: 5,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    padding: 5,
+  },
+  checkBoxText: {
+    color: 'black',
+    marginLeft: 5,
   },
   modalTextTT: {
     alignItems: 'center',
