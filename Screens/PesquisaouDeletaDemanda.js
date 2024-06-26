@@ -59,7 +59,7 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
                     id: item.id,
                     carga: item.carga,
                     destinatario: item.destinatario,
-                    enderecoDestinatario: item.enderecoDestinatario,
+                    enderecoDestinatario: item.endereciDestinatario,
                     remetente: item.remetente,
                     enderecoRemetente: item.enderecoRemetente,
                     metodoEntrega: item.metodoEntrega,

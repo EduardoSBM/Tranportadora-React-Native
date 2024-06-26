@@ -9,13 +9,18 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 export default function PesquisaouDeletaCaminhao({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
+  const [serach, setSerach] = useState('')
 
   function Search() {
     const PesquisaCaminhao = collection(database, 'Caminhao')
     const listen = onSnapshot(PesquisaCaminhao, (query) => {
       const list = []
       query.forEach((doc) => {
-        list.push({ ...doc.data(), id: doc.id })
+        const docData = doc.data();
+
+            if (docData.marca.includes(serach)) {
+              list.push({ ...docData, id: doc.id });
+            }
       })
       setPesquisa(list)
     })
@@ -34,11 +39,10 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
       <View style={styles.campoPesquisa}>
         <TextInput
           style={styles.inputContainer}
-          placeholder='Pesquise o caminhão pelo código:'
+          placeholder='Pesquise o caminhão pela marca:'
           placeholderTextColor="gray"
-          id='serach'
-          value={pesquisa}
-          onChange={e => setSerach(e.target.value)}
+          value={serach}
+          onChangeText={setSerach}
         />
         <View style={styles.square1}>
           <TouchableOpacity onPress={Search}>
@@ -58,11 +62,11 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
               <View style={styles.itensgeral}>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate('AlterarMotorista', {
+                    navigation.navigate('AlterarCaminhao', {
                       id: item.id,
-                      nome: item.capacidade,
-                      cpf: item.kmrodados,
-                      cargahoraria: item.marca,
+                      capacidade: item.capacidade,
+                      kmrodados: item.kmrodados,
+                      marca: item.marca,
                     })
                   }}>
 
@@ -76,7 +80,7 @@ export default function PesquisaouDeletaCaminhao({ navigation }) {
                 <View>
                   <TouchableOpacity
                     onPress={() => {
-                      deleteMotorista(item.id)
+                      deleteCaminhao(item.id)
                     }}>
                     <AntDesign name="delete" size={24} color="#373D20" />
                   </TouchableOpacity>

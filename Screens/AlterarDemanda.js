@@ -25,7 +25,7 @@ export default function AlterarDemanda({ navigation, route }) {
           updateDoc(demandaRef, {
             carga: carga,
             destinatario: destinatario,
-            enderecoDestinatario: enderecoDestinatario,
+            endereciDestinatario: enderecoDestinatario,
             enderecoRemetente: enderecoRemetente,
             peso: pesoCarga,
             volume: volume,

@@ -69,7 +69,7 @@ export default function AlterarCaminhao({ navigation, route }) {
                         style={styles.botom}
                         onPress={() => edit(id)}
                     >
-                        <Text style={styles.txtbotom}>Alterar caminão</Text>
+                        <Text style={styles.txtbotom}>Alterar caminhão</Text>
                     </TouchableOpacity>
                 </View>
             </View>

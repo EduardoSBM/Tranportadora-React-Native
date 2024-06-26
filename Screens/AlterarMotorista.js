@@ -67,7 +67,7 @@ export default function AlterarMotoristas({ navigation, route }) {
                         style={styles.botom}
                         onPress={() => edit(id)}
                     >
-                        <Text style={styles.txtbotom}>Alterar caminão</Text>
+                        <Text style={styles.txtbotom}>Alterar motorista</Text>
                     </TouchableOpacity>
                 </View>
             </View>

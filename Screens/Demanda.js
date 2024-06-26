@@ -20,24 +20,33 @@ export default function Demanda({ navigation }) {
   const methods = ['A', 'B', 'C', 'D', 'E'];
 
   function addDemanda() {
-    try {
-      const tasksCollection = collection(database, "Demanda");
-      addDoc(tasksCollection, {
-        carga: carga,
-        destinatario: destinatario,
-        endereciDestinatario: enderecoDestinatario,
-        enderecoRemetente: enderecoRemetente,
-        peso: pesoCarga,
-        volume: volume,
-        remetente: remetente,
-        valor: valorCargaSegurada,
-        metodoEntrega: selectedMethod,
-        //idUser: user.uid,
-      });
-      navigation.navigate('Home');
-      Alert.alert('Demanda solicitada')
-    } catch (error) {
-      console.error("Erro solicitar demanda: ", error);
+    const user = auth.currentUser; 
+    if (!user) {
+      throw new Error('No user is authenticated');
+    }
+    if (remetente, enderecoRemetente, valorCargaSegurada, carga, pesoCarga, volume, destinatario, enderecoDestinatario == '') {
+      Alert.alert('Preencha todos os campos');
+    }
+    else{
+      try {
+        const tasksCollection = collection(database, "Demanda");
+        addDoc(tasksCollection, {
+          carga: carga,
+          destinatario: destinatario,
+          endereciDestinatario: enderecoDestinatario,
+          enderecoRemetente: enderecoRemetente,
+          peso: pesoCarga,
+          volume: volume,
+          remetente: remetente,
+          valor: valorCargaSegurada,
+          metodoEntrega: selectedMethod,
+          idUser: user.uid,
+        });
+        navigation.navigate('Home');
+        Alert.alert('Demanda solicitada')
+      } catch (error) {
+        console.error("Erro solicitar demanda: ", error);
+      }
     }
   };
 

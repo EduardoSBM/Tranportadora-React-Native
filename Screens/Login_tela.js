@@ -17,7 +17,7 @@ export default function Login({ navigation }) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in:', userCredential.user);
-      navigation.navigate('Home_tela', { idUser: userCredential.user.uid }); 
+      {email == 'adm@gmail.com' && password == 'adm456' ? navigation.navigate('Menuadm') : navigation.navigate('Home', { idUser: userCredential.user.uid })};
 
     } catch (error) {
       console.error('Error logging in:', error);
@@ -28,7 +28,7 @@ export default function Login({ navigation }) {
   useEffect(() => {
     const statusAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigation.navigate("Home_tela", { idUser: user.uid });
+        navigation.navigate("Home", { idUser: user.uid });
       }
     });
 

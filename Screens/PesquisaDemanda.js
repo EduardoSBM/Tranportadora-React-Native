@@ -1,34 +1,35 @@
 import React, { useState }  from 'react';
 import { View, StyleSheet, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import {database, doc, deleteDoc} from '../configs/firebaseConfig';
-import { onSnapshot, collection } from 'firebase/firestore';
+import {database, doc, deleteDoc, auth} from '../configs/firebaseConfig';
+import { onSnapshot, collection, query, where } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
 
 export default function Pesquisa({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
+  const [search, setSearch] = useState('')
 
   function PesquisaDemanda(){ 
+    const user = auth.currentUser;
+    if (!user) {
+      throw new Error('No user is authenticated');
+    }
 
-        const demanda = collection(database, "Demanda");
-        //const q = query(demanda, where("idUser", "==", user.uid)); 
-        const unsubscribe = onSnapshot(demanda,/* q, */ (querySnapshot) => {
-            const list = [];
-            querySnapshot.forEach((doc) => {
-                list.push({ ...doc.data(), id: doc.id });
-            });
-            setPesquisa(list);
+    const demanda = collection(database, "Demanda");
+    const q = query(demanda, where("idUser", "==", user.uid)); 
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const list = [];
+        querySnapshot.forEach((doc) => {
+            const docData = doc.data();
+
+            if (docData.carga.includes(search)) {
+              list.push({ ...docData, id: doc.id });
+            }
         });
+        setPesquisa(list);
+    });
+} 
 
-        return () => unsubscribe();
-  } 
-
-  function deletePesquisa(id){
-        
-    const taskDocRef = doc(database, "Demanda", id);
-    deleteDoc(taskDocRef)
-    
-}
 
   return (
 
@@ -36,11 +37,10 @@ export default function Pesquisa({ navigation }) {
       <View style={styles.campoPesquisa}>
         <TextInput
         style={styles.inputContainer}
-        placeholder='Pesquise a demanda pelo código:'
+        placeholder='Pesquise a demanda pela carga:'
         placeholderTextColor="gray"
-        id='serach'
-        value={pesquisa}
-        onChangeText={setPesquisa}
+        value={search}
+        onChangeText={setSearch}
         />
         <View style={styles.square1}>
           <TouchableOpacity onPress={PesquisaDemanda}>
@@ -57,20 +57,7 @@ export default function Pesquisa({ navigation }) {
           renderItem={({ item }) => {
             return (
               <View style={styles.itensgeral}>
-                <TouchableOpacity onPress={() => {
-                  navigation.navigate('AlterarDemanda', {
-                    id: item.id,
-                    carga: item.carga,
-                    destinatario: item.destinatario,
-                    enderecoDestinatario: item.enderecoDestinatario,
-                    remetente: item.remetente,
-                    enderecoRemetente: item.enderecoRemetente,
-                    metodoEntrega: item.metodoEntrega,
-                    peso: item.peso,
-                    valor: item.valor,
-                    volume: item.volume,
-                  })
-                }}>
+                <TouchableOpacity>
                   <View >
                     <View style={styles.itemcarga}>
                       <Text style={styles.itemcargatxt}>{item.carga}</Text>
