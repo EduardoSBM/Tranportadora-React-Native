@@ -8,16 +8,25 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 export default function PesquisaouDeletaDemanda({ navigation }) {
 
   const [pesquisa, setPesquisa] = useState([])
+  const [serach, setSerach] = useState('')
 
   function Search() {
     const PesquisaDemanda = collection(database, 'Demanda')
     const listen = onSnapshot(PesquisaDemanda, (query) => {
       const list = []
       query.forEach((doc) => {
-        list.push({ ...doc.data(), id: doc.id })
+        const docData = doc.data();
+
+        if (docData.carga.includes(serach)) {
+          list.push({ ...docData, id: doc.id });
+        }
       })
       setPesquisa(list)
     })
+  }
+
+  function handleSearch(text) {
+    setSerach(text);
   }
 
   function deleteDemanda(id) {
@@ -33,11 +42,10 @@ export default function PesquisaouDeletaDemanda({ navigation }) {
       <View style={styles.campoPesquisa}>
         <TextInput
           style={styles.inputContainer}
-          placeholder='Pesquise a demanda pelo código:'
+          placeholder='Pesquise a demanda pela carga:'
           placeholderTextColor="gray"
-          id='serach'
-          value={pesquisa}
-          onChange={e => setSerach(e.target.value)}
+          value={serach}
+          onChangeText={setSerach}
         />
         <View style={styles.square1}>
           <TouchableOpacity onPress={Search}>
