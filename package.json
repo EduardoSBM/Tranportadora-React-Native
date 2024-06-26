@@ -19,7 +19,7 @@
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/stack": "^6.3.28",
     "axios": "^1.7.2",
-    "expo": "^51.0.13",
+    "expo": "~51.0.14",
     "expo-status-bar": "~1.12.1",
     "firebase": "^10.12.2",
     "firestore": "^1.1.6",

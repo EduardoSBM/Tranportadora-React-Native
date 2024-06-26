@@ -64,7 +64,7 @@ export default function Pesquisa({ navigation }) {
                     </View>
                     <View style={styles.itemdestinatario}>
                       <Text style={styles.itemdestinatariotxt}>Destinatario: {item.destinatario}</Text>
-                      <Text style={styles.itemEnderecodestinatariotxt}>Endereço D: {item.enderecoDestinatario}</Text>
+                      <Text style={styles.itemEnderecodestinatariotxt}>Endereço D: {item.endereciDestinatario}</Text>
                     </View>
                     <View style={styles.itemRemetente}>
                       <Text style={styles.itemremetentetxt}>Remetente: {item.remetente}</Text>
@@ -186,11 +186,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   itemdestinatariotxt: {
-    fontSize: 14,
+    fontSize: 10,
     marginLeft: -10,
   },
   itemEnderecodestinatariotxt: {
-    fontSize: 14,
+    fontSize: 10,
     marginLeft: 35,
   },
   itemRemetente: {
